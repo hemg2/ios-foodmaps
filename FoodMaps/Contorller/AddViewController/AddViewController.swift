@@ -39,14 +39,17 @@ final class AddViewController: UIViewController {
     weak var delegate: AddRestaurant?
     private var restaurantList: Restaurant?
     private var isNew: Bool
+    private let mapPoint: MTMapPoint
     
-    init() {
+    init(mapPoint: MTMapPoint) {
         self.isNew = true
+        self.mapPoint = mapPoint
         super.init(nibName: nil, bundle: nil)
     }
     
-    init(restaurantList: Restaurant) {
+    init(restaurantList: Restaurant, mapPoint: MTMapPoint) {
         self.isNew = false
+        self.mapPoint = mapPoint
         self.restaurantList = restaurantList
         super.init(nibName: nil, bundle: nil)
     }
@@ -120,15 +123,18 @@ extension AddViewController {
     }
     
     private func setUpItemText() {
-        if isNew == false {
-            guard let titleText = titleTextField.text,
-                  let descriptionText = descriptionTextView.text else { return }
-            delegate?.didEditRestaurant(title: titleText, description: descriptionText, index: 0)
-        } else {
-            guard let titleText = titleTextField.text,
-                  let descriptionText = descriptionTextView.text else { return }
+        guard let titleText = titleTextField.text,
+              let descriptionText = descriptionTextView.text else { return }
+        
+        if isNew {
+            let newPoint = MTMapPOIItem()
+            newPoint.itemName = title
+            newPoint.mapPoint = mapPoint
+            newPoint.markerType = .redPin
             
             delegate?.didAddRestaurants(title: titleText, description: descriptionText)
+        } else {
+            delegate?.didEditRestaurant(title: titleText, description: descriptionText, index: 0)
         }
     }
 }
