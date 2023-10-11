@@ -21,13 +21,14 @@ final class MainViewController: UIViewController {
     
     private var mapView: MTMapView?
     private var mapPointValue: MTMapPoint?
-    private var locationManager: CLLocationManager!
-    private var restaurantItems: [RestaurantItem] = []
+    private var locationManager = CLLocationManager()
+    private var restaurantItems = [RestaurantItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpMap()
+        setUpLocationManager()
         setUpSearchBarUI()
     }
     
@@ -63,15 +64,17 @@ extension MainViewController: UISearchBarDelegate {
     
     private func updateMapView(with searchText: String) {
         mapView?.removeAllPOIItems()
+        let filteredPoiItems: [MTMapPOIItem]
         
         if searchText.isEmpty {
-            mapView?.addPOIItems(restaurantItems.map { $0.poiItem })
+            filteredPoiItems = restaurantItems.map { $0.poiItem }
         } else {
-            let filteredPoiItems = restaurantItems.filter {
+            filteredPoiItems = restaurantItems.filter {
                 $0.poiItem.itemName.lowercased().contains(searchText.lowercased())
             }.map { $0.poiItem }
-            mapView?.addPOIItems(filteredPoiItems)
         }
+        
+        mapView?.addPOIItems(filteredPoiItems)
     }
 }
 
@@ -107,6 +110,10 @@ extension MainViewController: MTMapViewDelegate {
 }
 
 extension MainViewController: CLLocationManagerDelegate {
+    private func setUpLocationManager() {
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+    }
     private func getLocationUsagePermission() {
         self.locationManager.requestWhenInUseAuthorization()
     }
@@ -123,6 +130,21 @@ extension MainViewController: CLLocationManagerDelegate {
             getLocationUsagePermission()
         default:
             print("GPS:Default")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            let latitude = location.coordinate.latitude
+            let longitude = location.coordinate.longitude
+            let userLocation = MTMapPoint(geoCoord: .init(latitude: latitude, longitude: longitude))
+            let userMarker = MTMapPOIItem()
+            
+            userMarker.itemName = "나의 위치"
+            userMarker.mapPoint = userLocation
+            userMarker.markerType = .bluePin
+            mapView?.addPOIItems([userMarker])
+            mapView?.setMapCenter(userLocation, animated: true)
         }
     }
 }
@@ -152,9 +174,6 @@ extension MainViewController: AddRestaurant {
         guard index >= 0 && index < restaurantItems.count else {
             return
         }
-        
-        restaurantItems[index].restaurant.title = title
-        restaurantItems[index].restaurant.description = description
         
         let modifiedPOIItem = restaurantItems[index].poiItem
         modifiedPOIItem.itemName = title
