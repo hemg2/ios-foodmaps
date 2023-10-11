@@ -47,7 +47,7 @@ final class AddViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    init(restaurantList: Restaurant, mapPoint: MTMapPoint) {
+    init(restaurantList: Restaurant?, mapPoint: MTMapPoint) {
         self.isNew = false
         self.mapPoint = mapPoint
         self.restaurantList = restaurantList
@@ -65,6 +65,11 @@ final class AddViewController: UIViewController {
         setUpBarButtonItem()
         configureUI()
         setUpViewLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setUpItemValues()
     }
     
     private func configureUI() {
@@ -91,13 +96,19 @@ final class AddViewController: UIViewController {
 extension AddViewController {
     private func setUpViewController() {
         view.backgroundColor = .systemBackground
-        self.title = "음식점 추가"
         descriptionTextView.delegate = self
+        
+        if isNew {
+            self.title = "음식점 추가"
+        } else {
+            self.title = "음식점 변경"
+        }
     }
     
     private func setUpBarButtonItem() {
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButton))
-        navigationItem.rightBarButtonItem = doneButton
+        let deleteButton = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(deleteButton))
+        navigationItem.rightBarButtonItems = [doneButton, deleteButton]
         
         if isNew {
             let cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelButton))
@@ -113,6 +124,10 @@ extension AddViewController {
         dismiss(animated: true)
     }
     
+    @objc private func deleteButton() {
+        dismiss(animated: true)
+    }
+    
     @objc private func cancelButton() {
         dismiss(animated: true)
     }
@@ -120,6 +135,13 @@ extension AddViewController {
     @objc private func editButton() {
         setUpItemText()
         dismiss(animated: true)
+    }
+    
+    private func setUpItemValues() {
+        if let restaurantList = restaurantList {
+            titleTextField.text = restaurantList.title
+            descriptionTextView.text = restaurantList.description
+        }
     }
     
     private func setUpItemText() {
@@ -134,6 +156,9 @@ extension AddViewController {
             
             delegate?.didAddRestaurants(title: titleText, description: descriptionText)
         } else {
+            restaurantList?.title = titleText
+            restaurantList?.description = descriptionText
+            
             delegate?.didEditRestaurant(title: titleText, description: descriptionText, index: 0)
         }
     }
