@@ -10,6 +10,7 @@ import UIKit
 protocol AddRestaurant: AnyObject {
     func didAddRestaurants(title: String, description: String)
     func didEditRestaurant(title: String, description: String, index: Int)
+    func deletePin(withTag tag: Int)
 }
 
 final class AddViewController: UIViewController {
@@ -28,7 +29,7 @@ final class AddViewController: UIViewController {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = .preferredFont(forTextStyle: .body)
-        textView.text = "음식점 내용 입력하는 곳입니다."
+        textView.text = "내용 입력하는 곳입니다."
         textView.textColor = .placeholderText
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 1.0
@@ -38,7 +39,7 @@ final class AddViewController: UIViewController {
     
     weak var delegate: AddRestaurant?
     private var restaurantList: Restaurant?
-    private var isNew: Bool
+    private let isNew: Bool
     private let mapPoint: MTMapPoint
     
     init(mapPoint: MTMapPoint) {
@@ -47,7 +48,7 @@ final class AddViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    init(restaurantList: Restaurant, mapPoint: MTMapPoint) {
+    init(restaurantList: Restaurant?, mapPoint: MTMapPoint) {
         self.isNew = false
         self.mapPoint = mapPoint
         self.restaurantList = restaurantList
@@ -65,6 +66,11 @@ final class AddViewController: UIViewController {
         setUpBarButtonItem()
         configureUI()
         setUpViewLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setUpItemValues()
     }
     
     private func configureUI() {
@@ -91,13 +97,19 @@ final class AddViewController: UIViewController {
 extension AddViewController {
     private func setUpViewController() {
         view.backgroundColor = .systemBackground
-        self.title = "음식점 추가"
         descriptionTextView.delegate = self
+        
+        if isNew {
+            self.title = "음식점 추가"
+        } else {
+            self.title = "음식점 변경"
+        }
     }
     
     private func setUpBarButtonItem() {
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButton))
-        navigationItem.rightBarButtonItem = doneButton
+        let deleteButton = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(deleteButton))
+        navigationItem.rightBarButtonItems = [doneButton, deleteButton]
         
         if isNew {
             let cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelButton))
@@ -113,6 +125,12 @@ extension AddViewController {
         dismiss(animated: true)
     }
     
+    @objc private func deleteButton(_ sender: UIButton) {
+        let tag = sender.tag
+        delegate?.deletePin(withTag: tag)
+        dismiss(animated: true)
+    }
+    
     @objc private func cancelButton() {
         dismiss(animated: true)
     }
@@ -120,6 +138,13 @@ extension AddViewController {
     @objc private func editButton() {
         setUpItemText()
         dismiss(animated: true)
+    }
+    
+    private func setUpItemValues() {
+        if let restaurantList = restaurantList {
+            titleTextField.text = restaurantList.title
+            descriptionTextView.text = restaurantList.description
+        }
     }
     
     private func setUpItemText() {
@@ -134,6 +159,9 @@ extension AddViewController {
             
             delegate?.didAddRestaurants(title: titleText, description: descriptionText)
         } else {
+            restaurantList?.title = titleText
+            restaurantList?.description = descriptionText
+            
             delegate?.didEditRestaurant(title: titleText, description: descriptionText, index: 0)
         }
     }

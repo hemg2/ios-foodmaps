@@ -151,8 +151,8 @@
 		63BFBF092AD39284004150C7 /* FoodMaps */ = {
 			isa = PBXGroup;
 			children = (
-				63EA0DB82AD63A76001585EA /* Model */,
 				63BFC6842AD3A5D4004150C7 /* BridgingHeader.h */,
+				63EA0DB82AD63A76001585EA /* Model */,
 				63EA0DB12AD631F4001585EA /* AppSupport */,
 				63EA0DB32AD63260001585EA /* Contorller */,
 				63BFBF152AD39286004150C7 /* LaunchScreen.storyboard */,
