@@ -8,6 +8,10 @@
 import UIKit
 import CoreLocation
 
+protocol MainViewControllerDelegate: AnyObject {
+    
+}
+
 final class MainViewController: UIViewController {
     
     private var mapView: MTMapView? = nil
@@ -15,6 +19,7 @@ final class MainViewController: UIViewController {
     private var locationManager: CLLocationManager!
     private var poiItems = [MTMapPOIItem]()
     private var restaurantList = [Restaurant]()
+    weak var delegate: MainViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +37,7 @@ final class MainViewController: UIViewController {
 }
 
 extension MainViewController: MTMapViewDelegate {
-    func mapView(_ mapView: MTMapView!, doubleTapOn mapPoint: MTMapPoint!) {
+    func mapView(_ mapView: MTMapView!, longPressOn mapPoint: MTMapPoint!) {
         self.mapPointValue = mapPoint
         let addViewController = AddViewController(mapPoint: mapPoint)
         let navigationController = UINavigationController(rootViewController: addViewController)
@@ -57,42 +62,6 @@ extension MainViewController: MTMapViewDelegate {
         alertController.addAction(editAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
-    }
-    
-    func mapView(_ mapView: MTMapView!, longPressOn mapPoint: MTMapPoint!) {
-        let tappedCoordinate = mapPoint.mapPointGeo()
-        
-        for (index, poiItem) in poiItems.enumerated() {
-            let poiCoordinate = poiItem.mapPoint.mapPointGeo()
-            if coordinatesEqual(poiCoordinate, tappedCoordinate) {
-                print("삭제할 핀을 찾았습니다")
-                mapView.removePOIItems([poiItem])
-                poiItems.remove(at: index)
-                break
-            }
-        }
-    }
-    
-    private func coordinatesEqual(_ first: MTMapPointGeo, _ second: MTMapPointGeo) -> Bool {
-        return first.latitude == second.latitude && first.longitude == second.longitude
-    }
-    
-    func addDeleteButtonToPin(_ poiItem: MTMapPOIItem) {
-        let deleteButton = UIButton(type: .custom)
-        deleteButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        deleteButton.setTitle("삭제", for: .normal)
-        deleteButton.tag = poiItem.tag
-        deleteButton.addTarget(self, action: #selector(deleteButtonTapped(_:)), for: .touchUpInside)
-        poiItem.customCalloutBalloonView = deleteButton
-    }
-    
-    @objc func deleteButtonTapped(_ sender: UIButton) {
-        let tag = sender.tag
-        if let index = poiItems.firstIndex(where: { $0.tag == tag }) {
-            let poiItem = poiItems[index]
-            mapView?.removePOIItems([poiItem])
-            poiItems.remove(at: index)
-        }
     }
 }
 
@@ -143,5 +112,13 @@ extension MainViewController: AddRestaurant {
         
         mapView?.addPOIItems(poiItems)
         mapView?.updateConstraints()
+    }
+    
+    func deletePin(withTag tag: Int) {
+        if let index = poiItems.firstIndex(where: {$0.tag == tag}) {
+            let poiItem = poiItems[index]
+            mapView?.removePOIItems([poiItem])
+            poiItems.remove(at: index)
+        }
     }
 }

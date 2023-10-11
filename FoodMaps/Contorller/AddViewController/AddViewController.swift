@@ -10,6 +10,7 @@ import UIKit
 protocol AddRestaurant: AnyObject {
     func didAddRestaurants(title: String, description: String)
     func didEditRestaurant(title: String, description: String, index: Int)
+    func deletePin(withTag tag: Int)
 }
 
 final class AddViewController: UIViewController {
@@ -40,6 +41,7 @@ final class AddViewController: UIViewController {
     private var restaurantList: Restaurant?
     private var isNew: Bool
     private let mapPoint: MTMapPoint
+    weak var mainDelegate: MainViewControllerDelegate?
     
     init(mapPoint: MTMapPoint) {
         self.isNew = true
@@ -124,7 +126,9 @@ extension AddViewController {
         dismiss(animated: true)
     }
     
-    @objc private func deleteButton() {
+    @objc private func deleteButton(_ sender: UIButton) {
+        let tag = sender.tag
+        delegate?.deletePin(withTag: tag)
         dismiss(animated: true)
     }
     
