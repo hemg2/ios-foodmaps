@@ -59,12 +59,14 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: MTMapViewDelegate {
     func mapView(_ mapView: MTMapView!, singleTapOn mapPoint: MTMapPoint!) {
-        let tappedPoint = MTMapPOIItem()
-        tappedPoint.itemName = "새로운 장소"
-        tappedPoint.mapPoint = mapPoint
-        tappedPoint.markerType = .redPin
-        
-        mapView.addPOIItems([tappedPoint])
+        print("할때마다 찎이나?")
+        let newPoint = MTMapPOIItem()
+        newPoint.itemName = "새로운 장소"
+        newPoint.mapPoint = mapPoint
+        newPoint.markerType = .redPin
+        mapView.addPOIItems([newPoint])
+        poiItems.append(newPoint)
+        print("끝날떄마다???")
     }
     
     func mapView(_ mapView: MTMapView!, longPressOn mapPoint: MTMapPoint!) {
@@ -84,6 +86,24 @@ extension MainViewController: MTMapViewDelegate {
     private func coordinatesEqual(_ first: MTMapPointGeo, _ second: MTMapPointGeo) -> Bool {
         return first.latitude == second.latitude && first.longitude == second.longitude
     }
+    
+    func addDeleteButtonToPin(_ poiItem: MTMapPOIItem) {
+        let deleteButton = UIButton(type: .custom)
+        deleteButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        deleteButton.setTitle("삭제", for: .normal)
+        deleteButton.tag = poiItem.tag
+        deleteButton.addTarget(self, action: #selector(deleteButtonTapped(_:)), for: .touchUpInside)
+        poiItem.customCalloutBalloonView = deleteButton
+    }
+    
+    @objc func deleteButtonTapped(_ sender: UIButton) {
+        let tag = sender.tag
+        if let index = poiItems.firstIndex(where: { $0.tag == tag }) {
+            let poiItem = poiItems[index]
+            mapView?.removePOIItems([poiItem])
+            poiItems.remove(at: index)
+        }
+    }
 }
 
 extension MainViewController: CLLocationManagerDelegate {
@@ -100,7 +120,7 @@ extension MainViewController: CLLocationManagerDelegate {
         let locationNow = CLLocation(latitude: latitude, longitude: longitude)
         let geocoder = CLGeocoder()
         let locale = Locale(identifier: "ko-kr")
-
+        
         geocoder.reverseGeocodeLocation(locationNow, preferredLocale: locale) { (placeMarks, error) in
             if let address: [CLPlacemark] = placeMarks {
                 if let country: String = address.last?.country { print(country) }
