@@ -39,9 +39,8 @@ final class AddViewController: UIViewController {
     
     weak var delegate: AddRestaurant?
     private var restaurantList: Restaurant?
-    private var isNew: Bool
+    private let isNew: Bool
     private let mapPoint: MTMapPoint
-    weak var mainDelegate: MainViewControllerDelegate?
     
     init(mapPoint: MTMapPoint) {
         self.isNew = true

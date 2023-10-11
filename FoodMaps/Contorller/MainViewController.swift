@@ -8,26 +8,21 @@
 import UIKit
 import CoreLocation
 
-protocol MainViewControllerDelegate: AnyObject {
-    
-}
-
 final class MainViewController: UIViewController {
     
-    private var mapView: MTMapView? = nil
-    private var mapPointValue: MTMapPoint? = nil
+    private var mapView: MTMapView?
+    private var mapPointValue: MTMapPoint?
     private var locationManager: CLLocationManager!
     private var poiItems = [MTMapPOIItem]()
     private var restaurantList = [Restaurant]()
-    weak var delegate: MainViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showMap()
+        setUpMap()
     }
     
-    private func showMap() {
+    private func setUpMap() {
         mapView = MTMapView(frame: self.view.frame)
         guard let mapView else { return }
         mapView.delegate = self
