@@ -11,10 +11,12 @@ import CoreLocation
 final class MainViewController: UIViewController {
     
     private var mapView: MTMapView? = nil
+    private var mapPointValue: MTMapPoint? = nil
     private var locationManager: CLLocationManager!
     private var latitude: Double?
     private var longitude: Double?
     private var poiItems = [MTMapPOIItem]()
+    private var restaurantList = [Restaurant]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,14 +61,12 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: MTMapViewDelegate {
     func mapView(_ mapView: MTMapView!, singleTapOn mapPoint: MTMapPoint!) {
-        print("할때마다 찎이나?")
-        let newPoint = MTMapPOIItem()
-        newPoint.itemName = "새로운 장소"
-        newPoint.mapPoint = mapPoint
-        newPoint.markerType = .redPin
-        mapView.addPOIItems([newPoint])
-        poiItems.append(newPoint)
-        print("끝날떄마다???")
+        self.mapPointValue = mapPoint
+        let addViewController = AddViewController(mapPoint: mapPoint)
+        let navigationController = UINavigationController(rootViewController: addViewController)
+        
+        addViewController.delegate = self
+        present(navigationController, animated: true)
     }
     
     func mapView(_ mapView: MTMapView!, longPressOn mapPoint: MTMapPoint!) {
@@ -156,5 +156,24 @@ extension MainViewController: CLLocationManagerDelegate {
         let latitude: CLLocationDegrees = location.coordinate.latitude
         self.longitude = longitude
         self.latitude = latitude
+    }
+}
+
+extension MainViewController: AddRestaurant {
+    func didAddRestaurants(title: String, description: String) {
+        let newRestaurants = Restaurant(title: title, description: description)
+        self.restaurantList.append(newRestaurants)
+        
+        let newPoint = MTMapPOIItem()
+        newPoint.itemName = title
+        newPoint.mapPoint = mapPointValue
+        newPoint.markerType = .redPin
+        mapView?.addPOIItems([newPoint])
+        
+        mapView?.setMapCenter(mapPointValue, zoomLevel: 2, animated: true)
+    }
+    
+    func didEditRestaurant(title: String, description: String, index: Int) {
+        print("아직 미정")
     }
 }

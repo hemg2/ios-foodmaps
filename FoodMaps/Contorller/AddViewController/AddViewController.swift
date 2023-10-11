@@ -138,13 +138,3 @@ extension AddViewController {
         }
     }
 }
-
-
-//        print("할때마다 찎이나?")
-//        let newPoint = MTMapPOIItem()
-//        newPoint.itemName = "새로운 장소"
-//        newPoint.mapPoint = mapPoint
-//        newPoint.markerType = .redPin
-//        mapView.addPOIItems([newPoint])
-//        poiItems.append(newPoint)
-//        print("끝날떄마다???")
