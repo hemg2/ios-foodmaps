@@ -9,6 +9,16 @@ import UIKit
 import CoreLocation
 
 final class MainViewController: UIViewController {
+    private let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.searchBarStyle = .minimal
+        searchBar.backgroundColor = .white
+        searchBar.placeholder = "식당 검색"
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        
+        return searchBar
+    }()
+    
     private var mapView: MTMapView?
     private var mapPointValue: MTMapPoint?
     private var locationManager: CLLocationManager!
@@ -18,6 +28,7 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         
         setUpMap()
+        setUpSearchBarUI()
     }
     
     private func setUpMap() {
@@ -26,6 +37,41 @@ final class MainViewController: UIViewController {
         mapView.delegate = self
         mapView.baseMapType = .standard
         self.view.addSubview(mapView)
+    }
+    
+    private func setUpSearchBarUI() {
+        view.addSubview(searchBar)
+        searchBar.delegate = self
+        
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 4),
+            searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 4),
+            searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -4)
+        ])
+    }
+}
+
+extension MainViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        updateMapView(with: searchText)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        updateMapView(with: "")
+    }
+    
+    private func updateMapView(with searchText: String) {
+        mapView?.removeAllPOIItems()
+        
+        if searchText.isEmpty {
+            mapView?.addPOIItems(restaurantItems.map { $0.poiItem })
+        } else {
+            let filteredPoiItems = restaurantItems.filter {
+                $0.poiItem.itemName.lowercased().contains(searchText.lowercased())
+            }.map { $0.poiItem }
+            mapView?.addPOIItems(filteredPoiItems)
+        }
     }
 }
 
@@ -110,9 +156,9 @@ extension MainViewController: AddRestaurant {
         restaurantItems[index].restaurant.title = title
         restaurantItems[index].restaurant.description = description
         
-        let modifiedPOIItem = restaurantItems.first(where: { $0.poiItem.tag == index })
-        modifiedPOIItem?.poiItem.itemName = title
-        modifiedPOIItem?.poiItem.userObject = description as NSObject
+        let modifiedPOIItem = restaurantItems[index].poiItem
+        modifiedPOIItem.itemName = title
+        modifiedPOIItem.userObject = description as NSObject
         mapView?.addPOIItems(restaurantItems.map { $0.poiItem })
         mapView?.updateConstraints()
     }
