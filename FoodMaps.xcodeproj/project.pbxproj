@@ -50,7 +50,7 @@
 		63BFC6862AD3A973004150C7 /* DaumMap.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC6852AD3A973004150C7 /* DaumMap.xcframework */; };
 		63EA0DB52AD632B1001585EA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA0DB42AD632B1001585EA /* AddViewController.swift */; };
 		63EA0DB72AD639DD001585EA /* AddViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA0DB62AD639DD001585EA /* AddViewController+.swift */; };
-		63EA0DBA2AD63A86001585EA /* Restaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA0DB92AD63A86001585EA /* Restaurants.swift */; };
+		63EA0DBA2AD63A86001585EA /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA0DB92AD63A86001585EA /* Restaurant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,7 +108,7 @@
 		63BFC6852AD3A973004150C7 /* DaumMap.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DaumMap.xcframework; path = ../../Downloads/DaumMap.xcframework; sourceTree = "<group>"; };
 		63EA0DB42AD632B1001585EA /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		63EA0DB62AD639DD001585EA /* AddViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddViewController+.swift"; sourceTree = "<group>"; };
-		63EA0DB92AD63A86001585EA /* Restaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurants.swift; sourceTree = "<group>"; };
+		63EA0DB92AD63A86001585EA /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,7 +258,7 @@
 		63EA0DB82AD63A76001585EA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				63EA0DB92AD63A86001585EA /* Restaurants.swift */,
+				63EA0DB92AD63A86001585EA /* Restaurant.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -371,7 +371,7 @@
 			files = (
 				63BFBF0F2AD39284004150C7 /* MainViewController.swift in Sources */,
 				63BFBF0B2AD39284004150C7 /* AppDelegate.swift in Sources */,
-				63EA0DBA2AD63A86001585EA /* Restaurants.swift in Sources */,
+				63EA0DBA2AD63A86001585EA /* Restaurant.swift in Sources */,
 				63EA0DB72AD639DD001585EA /* AddViewController+.swift in Sources */,
 				63EA0DB52AD632B1001585EA /* AddViewController.swift in Sources */,
 				63BFBF0D2AD39284004150C7 /* SceneDelegate.swift in Sources */,

@@ -37,20 +37,30 @@ final class AddViewController: UIViewController {
         return textView
     }()
     
-    weak var delegate: AddRestaurant?
-    private var restaurantList: Restaurant?
     private let isNew: Bool
     private let mapPoint: MTMapPoint
+    private var index: Int?
+    private var poiItem: MTMapPOIItem?
+    private var restaurantList: Restaurant?
+    weak var delegate: AddRestaurant?
     
-    init(mapPoint: MTMapPoint) {
+    init(mapPoint: MTMapPoint, index: Int?) {
         self.isNew = true
         self.mapPoint = mapPoint
+        self.index = index
+        
+        if let index = index {
+            let poiItem = MTMapPOIItem()
+            poiItem.tag = index
+            self.poiItem = poiItem
+        }
         super.init(nibName: nil, bundle: nil)
     }
     
-    init(restaurantList: Restaurant?, mapPoint: MTMapPoint) {
+    init(restaurantList: Restaurant?, mapPoint: MTMapPoint, index: Int?) {
         self.isNew = false
         self.mapPoint = mapPoint
+        self.index = index
         self.restaurantList = restaurantList
         super.init(nibName: nil, bundle: nil)
     }
@@ -125,8 +135,11 @@ extension AddViewController {
         dismiss(animated: true)
     }
     
-    @objc private func deleteButton(_ sender: UIButton) {
-        let tag = sender.tag
+    @objc private func deleteButton() {
+        guard let tag = self.index else {
+            return
+        }
+        
         delegate?.deletePin(withTag: tag)
         dismiss(animated: true)
     }
@@ -149,7 +162,8 @@ extension AddViewController {
     
     private func setUpItemText() {
         guard let titleText = titleTextField.text,
-              let descriptionText = descriptionTextView.text else { return }
+              let descriptionText = descriptionTextView.text,
+              let index = index else { return }
         
         if isNew {
             let newPoint = MTMapPOIItem()
@@ -162,7 +176,7 @@ extension AddViewController {
             restaurantList?.title = titleText
             restaurantList?.description = descriptionText
             
-            delegate?.didEditRestaurant(title: titleText, description: descriptionText, index: 0)
+            delegate?.didEditRestaurant(title: titleText, description: descriptionText, index: index)
         }
     }
 }
