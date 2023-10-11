@@ -28,7 +28,7 @@ final class AddViewController: UIViewController {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = .preferredFont(forTextStyle: .body)
-        textView.text = "음식점 내용 입력하는 곳입니다."
+        textView.text = "내용 입력하는 곳입니다."
         textView.textColor = .placeholderText
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.borderWidth = 1.0

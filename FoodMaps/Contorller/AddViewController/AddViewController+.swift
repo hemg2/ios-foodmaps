@@ -15,7 +15,7 @@ extension AddViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = "음식점 내용 입력하는 곳입니다."
+            textView.text = "내용 입력하는 곳입니다."
             textView.textColor = .placeholderText
         }
     }

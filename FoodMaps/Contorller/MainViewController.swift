@@ -32,7 +32,7 @@ final class MainViewController: UIViewController {
 }
 
 extension MainViewController: MTMapViewDelegate {
-    func mapView(_ mapView: MTMapView!, singleTapOn mapPoint: MTMapPoint!) {
+    func mapView(_ mapView: MTMapView!, doubleTapOn mapPoint: MTMapPoint!) {
         self.mapPointValue = mapPoint
         let addViewController = AddViewController(mapPoint: mapPoint)
         let navigationController = UINavigationController(rootViewController: addViewController)
