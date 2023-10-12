@@ -48,12 +48,6 @@ final class AddViewController: UIViewController {
         self.isNew = true
         self.mapPoint = mapPoint
         self.index = index
-        
-        if let index = index {
-            let poiItem = MTMapPOIItem()
-            poiItem.tag = index
-            self.poiItem = poiItem
-        }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -117,12 +111,13 @@ extension AddViewController {
     }
     
     private func setUpBarButtonItem() {
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButton))
         let deleteButton = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(deleteButton))
-        navigationItem.rightBarButtonItems = [doneButton, deleteButton]
+        navigationItem.rightBarButtonItem = deleteButton
         
         if isNew {
+            let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButton))
             let cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelButton))
+            navigationItem.rightBarButtonItem = doneButton
             navigationItem.leftBarButtonItem = cancelButton
         } else {
             let editButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editButton))

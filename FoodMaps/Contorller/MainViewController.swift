@@ -114,6 +114,7 @@ extension MainViewController: CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
     }
+    
     private func getLocationUsagePermission() {
         self.locationManager.requestWhenInUseAuthorization()
     }
@@ -178,13 +179,17 @@ extension MainViewController: AddRestaurant {
         let modifiedPOIItem = restaurantItems[index].poiItem
         modifiedPOIItem.itemName = title
         modifiedPOIItem.userObject = description as NSObject
-        mapView?.addPOIItems(restaurantItems.map { $0.poiItem })
-        mapView?.updateConstraints()
     }
     
     func deletePin(withTag tag: Int) {
+        guard tag >= 0 && tag < restaurantItems.count else { return }
+        
         let poiItemToRemove = restaurantItems[tag].poiItem
-        restaurantItems.remove(at: tag)
         mapView?.removePOIItems([poiItemToRemove])
+        restaurantItems.remove(at: tag)
+        
+        for (index, item) in restaurantItems.enumerated() {
+            item.poiItem.tag = index
+        }
     }
 }
