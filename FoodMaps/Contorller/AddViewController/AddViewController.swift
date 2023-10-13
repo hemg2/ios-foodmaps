@@ -8,8 +8,8 @@
 import UIKit
 
 protocol AddRestaurant: AnyObject {
-    func didAddRestaurants(title: String, description: String)
-    func didEditRestaurant(title: String, description: String, index: Int)
+    func didAddRestaurants(title: String, description: String, category: RestaurantCategory)
+    func didEditRestaurant(title: String, description: String, index: Int, category: RestaurantCategory)
     func deletePin(withTag tag: Int)
 }
 
@@ -25,6 +25,14 @@ final class AddViewController: UIViewController {
         return textField
     }()
     
+    private let categoryControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl(items: RestaurantCategory.allCases.map { $0.rawValue })
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        
+        return segmentedControl
+    }()
+    
     private let descriptionTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,20 +45,24 @@ final class AddViewController: UIViewController {
         return textView
     }()
     
-    weak var delegate: AddRestaurant?
-    private var restaurantList: Restaurant?
     private let isNew: Bool
     private let mapPoint: MTMapPoint
+    private var index: Int?
+    private var poiItem: MTMapPOIItem?
+    private var restaurantList: Restaurant?
+    weak var delegate: AddRestaurant?
     
-    init(mapPoint: MTMapPoint) {
+    init(mapPoint: MTMapPoint, index: Int?) {
         self.isNew = true
         self.mapPoint = mapPoint
+        self.index = index
         super.init(nibName: nil, bundle: nil)
     }
     
-    init(restaurantList: Restaurant?, mapPoint: MTMapPoint) {
+    init(restaurantList: Restaurant?, mapPoint: MTMapPoint, index: Int?) {
         self.isNew = false
         self.mapPoint = mapPoint
+        self.index = index
         self.restaurantList = restaurantList
         super.init(nibName: nil, bundle: nil)
     }
@@ -74,21 +86,25 @@ final class AddViewController: UIViewController {
     }
     
     private func configureUI() {
+        view.addSubview(categoryControl)
         view.addSubview(titleTextField)
         view.addSubview(descriptionTextView)
     }
     
     private func setUpViewLayout() {
         NSLayoutConstraint.activate([
-            titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            categoryControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 4),
+            categoryControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 4),
+            categoryControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -4),
+            
+            titleTextField.topAnchor.constraint(equalTo: categoryControl.bottomAnchor, constant: 8),
             titleTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 4),
             titleTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -4),
             
             descriptionTextView.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 8),
             descriptionTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 4),
             descriptionTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -4),
-            descriptionTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -4),
-            
+            descriptionTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -4)
         ])
     }
 }
@@ -107,12 +123,13 @@ extension AddViewController {
     }
     
     private func setUpBarButtonItem() {
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButton))
         let deleteButton = UIBarButtonItem(title: "Delete", style: .done, target: self, action: #selector(deleteButton))
-        navigationItem.rightBarButtonItems = [doneButton, deleteButton]
+        navigationItem.rightBarButtonItem = deleteButton
         
         if isNew {
+            let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButton))
             let cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelButton))
+            navigationItem.rightBarButtonItem = doneButton
             navigationItem.leftBarButtonItem = cancelButton
         } else {
             let editButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editButton))
@@ -121,12 +138,16 @@ extension AddViewController {
     }
     
     @objc private func doneButton() {
-        setUpItemText()
+        let selectedCategory: RestaurantCategory = RestaurantCategory.allCases[categoryControl.selectedSegmentIndex]
+        setUpItemText(category: selectedCategory)
         dismiss(animated: true)
     }
     
-    @objc private func deleteButton(_ sender: UIButton) {
-        let tag = sender.tag
+    @objc private func deleteButton() {
+        guard let tag = self.index else {
+            return
+        }
+        
         delegate?.deletePin(withTag: tag)
         dismiss(animated: true)
     }
@@ -136,7 +157,8 @@ extension AddViewController {
     }
     
     @objc private func editButton() {
-        setUpItemText()
+        let selectedCategory: RestaurantCategory = RestaurantCategory.allCases[categoryControl.selectedSegmentIndex]
+        setUpItemText(category: selectedCategory)
         dismiss(animated: true)
     }
     
@@ -147,22 +169,21 @@ extension AddViewController {
         }
     }
     
-    private func setUpItemText() {
+    private func setUpItemText(category: RestaurantCategory) {
         guard let titleText = titleTextField.text,
-              let descriptionText = descriptionTextView.text else { return }
+              let descriptionText = descriptionTextView.text,
+              let index = index else { return }
+        
+        let newPoint = MTMapPOIItem()
+        newPoint.itemName = title
+        newPoint.mapPoint = mapPoint
         
         if isNew {
-            let newPoint = MTMapPOIItem()
-            newPoint.itemName = title
-            newPoint.mapPoint = mapPoint
-            newPoint.markerType = .redPin
-            
-            delegate?.didAddRestaurants(title: titleText, description: descriptionText)
+            delegate?.didAddRestaurants(title: titleText, description: descriptionText, category: category)
         } else {
             restaurantList?.title = titleText
             restaurantList?.description = descriptionText
-            
-            delegate?.didEditRestaurant(title: titleText, description: descriptionText, index: 0)
+            delegate?.didEditRestaurant(title: titleText, description: descriptionText, index: index, category: category)
         }
     }
 }
