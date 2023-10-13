@@ -19,6 +19,16 @@ final class MainViewController: UIViewController {
         return searchBar
     }()
     
+    private let currentLocationButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "location.fill"), for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 20
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     private var mapView: MTMapView?
     private var mapPointValue: MTMapPoint?
     private var locationManager = CLLocationManager()
@@ -30,6 +40,7 @@ final class MainViewController: UIViewController {
         setUpMap()
         setUpLocationManager()
         setUpSearchBarUI()
+        setUpCurrentButtonUI()
     }
     
     private func setUpMap() {
@@ -49,6 +60,21 @@ final class MainViewController: UIViewController {
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 4),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -4)
         ])
+    }
+    
+    private func setUpCurrentButtonUI() {
+        view.addSubview(currentLocationButton)
+        currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            currentLocationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            currentLocationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            currentLocationButton.widthAnchor.constraint(equalToConstant: 40),
+            currentLocationButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
+    @objc func currentLocationButtonTapped() {
     }
 }
 
