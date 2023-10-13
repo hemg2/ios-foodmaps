@@ -82,7 +82,6 @@ extension MainViewController: MTMapViewDelegate {
     func mapView(_ mapView: MTMapView!, longPressOn mapPoint: MTMapPoint!) {
         self.mapPointValue = mapPoint
         let poiItem = MTMapPOIItem()
-        
         let addViewController = AddViewController(mapPoint: mapPoint, index: poiItem.tag)
         let navigationController = UINavigationController(rootViewController: addViewController)
         
@@ -93,7 +92,10 @@ extension MainViewController: MTMapViewDelegate {
     func mapView(_ mapView: MTMapView!, touchedCalloutBalloonRightSideOf poiItem: MTMapPOIItem!) {
         let alertController = UIAlertController(title: "수정", message: "마커 수정", preferredStyle: .actionSheet)
         let editAction = UIAlertAction(title: "수정진행", style: .default) { [weak self] _ in
-            let restaurant = Restaurant(title: poiItem.itemName, description: poiItem.userObject as? String ?? "")
+            let currentCategory = self?.restaurantItems.first { $0.poiItem.tag == poiItem.tag }?.restaurant.category ?? .korean
+            let restaurant = Restaurant(title: poiItem.itemName,
+                                        description: poiItem.userObject as? String ?? "",
+                                        category: currentCategory)
             let addViewController = AddViewController(restaurantList: restaurant, mapPoint: poiItem.mapPoint, index: poiItem.tag)
             let navigationController = UINavigationController(rootViewController: addViewController)
             
@@ -113,6 +115,7 @@ extension MainViewController: CLLocationManagerDelegate {
     private func setUpLocationManager() {
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
+        getLocationUsagePermission()
     }
     
     private func getLocationUsagePermission() {
@@ -151,13 +154,23 @@ extension MainViewController: CLLocationManagerDelegate {
 }
 
 extension MainViewController: AddRestaurant {
-    func didAddRestaurants(title: String, description: String) {
-        let newRestaurants = Restaurant(title: title, description: description)
+    func didAddRestaurants(title: String, description: String, category: RestaurantCategory) {
+        let newRestaurants = Restaurant(title: title, description: description, category: category)
         let newPoint = MTMapPOIItem()
         newPoint.itemName = title
         newPoint.userObject = description as NSObject
         newPoint.mapPoint = mapPointValue
-        newPoint.markerType = .redPin
+        
+        switch category {
+        case .korean:
+            newPoint.markerType = .redPin
+        case .chinese:
+            newPoint.markerType = .bluePin
+        case .japanese:
+            newPoint.markerType = .yellowPin
+        case .western:
+            newPoint.markerType = .yellowPin
+        }
         
         if let lastIndex = restaurantItems.last?.poiItem.tag {
             newPoint.tag = lastIndex + 1
@@ -171,7 +184,7 @@ extension MainViewController: AddRestaurant {
         mapView?.setMapCenter(mapPointValue, zoomLevel: 2, animated: true)
     }
     
-    func didEditRestaurant(title: String, description: String, index: Int) {
+    func didEditRestaurant(title: String, description: String, index: Int, category: RestaurantCategory) {
         guard index >= 0 && index < restaurantItems.count else {
             return
         }
@@ -179,6 +192,20 @@ extension MainViewController: AddRestaurant {
         let modifiedPOIItem = restaurantItems[index].poiItem
         modifiedPOIItem.itemName = title
         modifiedPOIItem.userObject = description as NSObject
+        
+        switch category {
+        case .korean:
+            modifiedPOIItem.markerType = .redPin
+        case .chinese:
+            modifiedPOIItem.markerType = .bluePin
+        case .japanese:
+            modifiedPOIItem.markerType = .yellowPin
+        case .western:
+            modifiedPOIItem.markerType = .yellowPin
+        }
+        
+        mapView?.addPOIItems(restaurantItems.map{$0.poiItem})
+        mapView?.updateConstraints()
     }
     
     func deletePin(withTag tag: Int) {
