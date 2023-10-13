@@ -21,7 +21,7 @@ final class LocationNetWork {
         
         let request = api.request(url: url)
         
-        session.dataTask(with: request) { data, response, error in
+        session.dataTask(with: request) { data, _, error in
             if error != nil {
                 completion(.failure(URLError(.cannotLoadFromNetwork)))
             }

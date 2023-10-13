@@ -7,7 +7,7 @@
 
 enum APIKey {
     static var location: String =  {
-        return APIKeyFromPlist(key: "KAKAO_APP_KEY")
+        return APIKeyFromPlist(key: "KAKAOAPIKey")
     }()
 }
 
@@ -15,7 +15,7 @@ extension APIKey {
     private static func APIKeyFromPlist(key: String) -> String {
         var apiKey = ""
         
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
             let networkKeys = NSDictionary(contentsOfFile: path)
             
             if let networkKeys = networkKeys {
