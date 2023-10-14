@@ -196,12 +196,13 @@ extension MainViewController: CLLocationManagerDelegate {
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
             let userLocation = MTMapPoint(geoCoord: .init(latitude: latitude, longitude: longitude))
-            let userMarker = MTMapPOIItem()
+            let circle = MTMapCircle()
+            circle.circleCenterPoint = userLocation
+            circle.circleLineColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+            circle.circleFillColor = UIColor(red: 0, green: 1, blue: 1, alpha: 0.1)
+            circle.circleRadius = 100
             
-            userMarker.mapPoint = userLocation
-            DispatchQueue.global().async {
-                self.mapView.currentLocationTrackingMode = .onWithoutHeadingWithoutMapMoving
-            }
+            mapView.addCircle(circle)
             mapView.setMapCenter(userLocation, animated: true)
             locationManager.stopUpdatingLocation()
         }
