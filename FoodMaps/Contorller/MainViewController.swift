@@ -57,7 +57,7 @@ final class MainViewController: UIViewController {
         searchBar.delegate = self
         
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 4),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 4),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -4)
         ])
@@ -83,13 +83,25 @@ final class MainViewController: UIViewController {
     }
     
     private func fetchLocationData() {
-        locationNetWork.getLocation(by: mapPointValue) { result in
+        locationNetWork.getLocation(by: mapPointValue) { [weak self] result in
             switch result {
             case .success(let locationData):
-                print(locationData)
+                self?.addMarkers(for: locationData)
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+    
+    private func addMarkers(for locationData: LocationData) {
+        for item in locationData.documents {
+            let poiItem = MTMapPOIItem()
+            poiItem.itemName = item.placeName
+            if let latitude = Double(item.y), let longitude = Double(item.x) {
+                poiItem.mapPoint = MTMapPoint(geoCoord: .init(latitude: latitude, longitude: longitude))
+            }
+            poiItem.markerType = .bluePin
+            mapView.addPOIItems([poiItem])
         }
     }
 }
