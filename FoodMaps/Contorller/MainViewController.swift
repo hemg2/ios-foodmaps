@@ -198,11 +198,10 @@ extension MainViewController: CLLocationManagerDelegate {
             let userLocation = MTMapPoint(geoCoord: .init(latitude: latitude, longitude: longitude))
             let userMarker = MTMapPOIItem()
             
-            userMarker.itemName = "나의 위치"
             userMarker.mapPoint = userLocation
-            userMarker.markerType = .customImage
-            userMarker.customImage = UIImage(named: "Tag")
-            mapView.addPOIItems([userMarker])
+            DispatchQueue.global().async {
+                self.mapView.currentLocationTrackingMode = .onWithoutHeadingWithoutMapMoving
+            }
             mapView.setMapCenter(userLocation, animated: true)
             locationManager.stopUpdatingLocation()
         }
