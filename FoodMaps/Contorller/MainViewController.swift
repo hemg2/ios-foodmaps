@@ -219,13 +219,17 @@ extension MainViewController: AddRestaurant {
         
         switch category {
         case .korean:
-            newPoint.markerType = .redPin
+            newPoint.markerType = .customImage
+            newPoint.customImage = UIImage(named: "한국")
         case .chinese:
-            newPoint.markerType = .bluePin
+            newPoint.markerType = .customImage
+            newPoint.customImage = UIImage(named: "중국")
         case .japanese:
-            newPoint.markerType = .yellowPin
+            newPoint.markerType = .customImage
+            newPoint.customImage = UIImage(named: "일본")
         case .western:
-            newPoint.markerType = .yellowPin
+            newPoint.markerType = .customImage
+            newPoint.customImage = UIImage(named: "미국")
         }
         
         if let lastIndex = restaurantItems.last?.poiItem.tag {
@@ -251,16 +255,21 @@ extension MainViewController: AddRestaurant {
         
         switch category {
         case .korean:
-            modifiedPOIItem.markerType = .redPin
+            modifiedPOIItem.markerType = .customImage
+            modifiedPOIItem.customImage = UIImage(named: "한국")
         case .chinese:
-            modifiedPOIItem.markerType = .bluePin
+            modifiedPOIItem.markerType = .customImage
+            modifiedPOIItem.customImage = UIImage(named: "중국")
         case .japanese:
-            modifiedPOIItem.markerType = .yellowPin
+            modifiedPOIItem.markerType = .customImage
+            modifiedPOIItem.customImage = UIImage(named: "일본")
         case .western:
-            modifiedPOIItem.markerType = .yellowPin
+            modifiedPOIItem.markerType = .customImage
+            modifiedPOIItem.customImage = UIImage(named: "미국")
         }
         
         mapView.addPOIItems(restaurantItems.map{$0.poiItem})
+        mapView.select(modifiedPOIItem, animated: true)
         mapView.updateConstraints()
     }
     
