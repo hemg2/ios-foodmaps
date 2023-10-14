@@ -78,12 +78,6 @@ final class MainViewController: UIViewController {
     @objc func currentLocationButtonTapped() {
         if let location = locationManager.location?.coordinate {
             let userLocation = MTMapPoint(geoCoord: .init(latitude: location.latitude, longitude: location.longitude))
-            let userMarker = MTMapPOIItem()
-            
-            userMarker.itemName = "나의 위치"
-            userMarker.mapPoint = userLocation
-            userMarker.markerType = .bluePin
-            mapView.addPOIItems([userMarker])
             mapView.setMapCenter(userLocation, animated: true)
         }
     }
@@ -194,9 +188,11 @@ extension MainViewController: CLLocationManagerDelegate {
             
             userMarker.itemName = "나의 위치"
             userMarker.mapPoint = userLocation
-            userMarker.markerType = .bluePin
+            userMarker.markerType = .customImage
+            userMarker.customImage = UIImage(named: "Tag")
             mapView.addPOIItems([userMarker])
             mapView.setMapCenter(userLocation, animated: true)
+            locationManager.stopUpdatingLocation()
         }
     }
 }
