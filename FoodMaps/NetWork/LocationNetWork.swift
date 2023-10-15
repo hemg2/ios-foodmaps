@@ -5,6 +5,8 @@
 //  Created by Hemg on 10/13/23.
 //
 
+import CoreLocation
+
 final class LocationNetWork {
     private let session: URLSession
     let api = LocationAPI()
@@ -13,8 +15,8 @@ final class LocationNetWork {
         self.session = session
     }
     
-    func getLocation(by mapPoint: MTMapPoint, completion: @escaping (Result<LocationData, Error>) -> Void) {
-        guard let url = api.getLocation(by: mapPoint).url else {
+    func getLocation(by location: CLLocationManager, completion: @escaping (Result<LocationData, Error>) -> Void) {
+        guard let url = api.getLocation(by: location).url else {
             completion(.failure(URLError(.badURL)))
             return
         }

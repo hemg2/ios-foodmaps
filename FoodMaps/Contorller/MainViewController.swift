@@ -29,6 +29,17 @@ final class MainViewController: UIViewController {
         return button
     }()
     
+    private let requestButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("맛집!", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 20
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     private var mapView = MTMapView()
     private var mapPointValue = MTMapPoint()
     private var locationManager = CLLocationManager()
@@ -37,12 +48,11 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        myLocation()
         setUpMap()
         setUpLocationManager()
         setUpSearchBarUI()
-        setUpCurrentButtonUI()
-        fetchLocationData()
+        setUpButton()
     }
     
     private func setUpMap() {
@@ -63,19 +73,34 @@ final class MainViewController: UIViewController {
         ])
     }
     
-    private func setUpCurrentButtonUI() {
+    private func setUpButton() {
         view.addSubview(currentLocationButton)
+        view.addSubview(requestButton)
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
+        requestButton.addTarget(self, action: #selector(requestButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             currentLocationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
             currentLocationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
             currentLocationButton.widthAnchor.constraint(equalToConstant: 40),
-            currentLocationButton.heightAnchor.constraint(equalToConstant: 40)
+            currentLocationButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            requestButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            requestButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            requestButton.widthAnchor.constraint(equalToConstant: 40),
+            requestButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
     @objc func currentLocationButtonTapped() {
+        myLocation()
+    }
+    
+    @objc func requestButtonTapped() {
+        fetchLocationData()
+    }
+    
+    private func myLocation() {
         if let location = locationManager.location?.coordinate {
             let userLocation = MTMapPoint(geoCoord: .init(latitude: location.latitude, longitude: location.longitude))
             mapView.setMapCenter(userLocation, animated: true)
@@ -83,7 +108,7 @@ final class MainViewController: UIViewController {
     }
     
     private func fetchLocationData() {
-        locationNetWork.getLocation(by: mapPointValue) { [weak self] result in
+        locationNetWork.getLocation(by: locationManager) { [weak self] result in
             switch result {
             case .success(let locationData):
                 self?.addMarkers(for: locationData)

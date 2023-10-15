@@ -11,19 +11,18 @@ final class LocationAPI {
     private let scheme = "https"
     private let host = "dapi.kakao.com"
     private let path = "/v2/local/search/category.json"
-    private var locationManager = CLLocationManager()
     
-    func getLocation(by mapPoint: MTMapPoint) -> URLComponents {
+    func getLocation(by location: CLLocationManager) -> URLComponents {
         var components = URLComponents()
         components.scheme = scheme
         components.host = host
         components.path = path
         
-        if let location = locationManager.location?.coordinate {
+        if let coordinate = location.location?.coordinate {
             components.queryItems = [
                 URLQueryItem(name: "category_group_code", value: "FD6"),
-                URLQueryItem(name: "x", value: "\(location.longitude)"),
-                URLQueryItem(name: "y", value: "\(location.latitude)"),
+                URLQueryItem(name: "x", value: "\(coordinate.longitude)"),
+                URLQueryItem(name: "y", value: "\(coordinate.latitude)"),
                 URLQueryItem(name: "radius", value: "500"),
                 URLQueryItem(name: "sort", value: "distance")
             ]
