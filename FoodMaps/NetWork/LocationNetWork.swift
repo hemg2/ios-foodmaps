@@ -5,8 +5,6 @@
 //  Created by Hemg on 10/13/23.
 //
 
-import CoreLocation
-
 final class LocationNetWork {
     private let session: URLSession
     let api = LocationAPI()

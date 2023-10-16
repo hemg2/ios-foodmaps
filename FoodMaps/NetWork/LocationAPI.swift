@@ -5,8 +5,6 @@
 //  Created by Hemg on 10/13/23.
 //
 
-import CoreLocation
-
 final class LocationAPI {
     private let scheme = "https"
     private let host = "dapi.kakao.com"
