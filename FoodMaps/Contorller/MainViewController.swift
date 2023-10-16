@@ -85,8 +85,8 @@ final class MainViewController: UIViewController {
             currentLocationButton.widthAnchor.constraint(equalToConstant: 40),
             currentLocationButton.heightAnchor.constraint(equalToConstant: 40),
             
-            requestButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
-            requestButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            requestButton.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 12),
+            requestButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
             requestButton.widthAnchor.constraint(equalToConstant: 40),
             requestButton.heightAnchor.constraint(equalToConstant: 40)
         ])
@@ -108,7 +108,7 @@ final class MainViewController: UIViewController {
     }
     
     private func fetchLocationData() {
-        locationNetWork.getLocation(by: locationManager) { [weak self] result in
+        locationNetWork.getLocation(by: mapPointValue) { [weak self] result in
             switch result {
             case .success(let locationData):
                 self?.addMarkers(for: locationData)
@@ -116,6 +116,9 @@ final class MainViewController: UIViewController {
                 print(error)
             }
         }
+        mapView.removeAllPOIItems()
+        let customPins = restaurantItems.map { $0.poiItem }
+        mapView.addPOIItems(customPins)
     }
     
     private func addMarkers(for locationData: LocationData) {
@@ -125,9 +128,21 @@ final class MainViewController: UIViewController {
             if let latitude = Double(item.y), let longitude = Double(item.x) {
                 poiItem.mapPoint = MTMapPoint(geoCoord: .init(latitude: latitude, longitude: longitude))
             }
+            // 어짜피 초기값은 내위치로 오게되어있다. 로케이션 매니져로 인해서 그러니깐 이제 업데이트 될때 그좌표를 전역으로 넣고 그걸 여기서 변경하면 나타나지 않을까?
+            // 뷰하나 해서 나타나게 하자 그렇게해서 category_name ,distance(거리), place_name가게이름, 주소road_address_name 정도? 그럼 커스텀은? 그럼 알럿을 하나더? 아니면 수정으로 가거나 통신받은것은 그냥 상세뷰? 커스텀만 수정하게?
             poiItem.markerType = .bluePin
             mapView.addPOIItems([poiItem])
         }
+        print("\(mapPointValue.mapPointGeo().longitude)  \(mapPointValue.mapPointGeo().latitude) 에드 마크")
+    }
+    
+    func mapView(_ mapView: MTMapView!, updateCurrentLocation location: MTMapPoint!, withAccuracy accuracy: MTMapLocationAccuracy) {
+        print("너 호출은 되니?")
+    }
+    
+    func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
+        mapPointValue = mapCenterPoint
+        print("\(mapPointValue.mapPointGeo().latitude)인스턴스   \(mapCenterPoint.mapPointGeo().latitude) 메서드 인스턴스")
     }
 }
 
@@ -148,8 +163,10 @@ extension MainViewController: UISearchBarDelegate {
         if searchText.isEmpty {
             filteredPoiItems = restaurantItems.map { $0.poiItem }
         } else {
-            filteredPoiItems = restaurantItems.filter {
-                $0.poiItem.itemName.lowercased().contains(searchText.lowercased())
+            filteredPoiItems = restaurantItems.filter { restaurant in
+                let itemName = restaurant.poiItem.itemName.lowercased()
+                let lowercasedSearchText = searchText.lowercased()
+                return itemName.contains(lowercasedSearchText)
             }.map { $0.poiItem }
         }
         
@@ -213,23 +230,6 @@ extension MainViewController: CLLocationManagerDelegate {
             getLocationUsagePermission()
         default:
             print("GPS:Default")
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            let latitude = location.coordinate.latitude
-            let longitude = location.coordinate.longitude
-            let userLocation = MTMapPoint(geoCoord: .init(latitude: latitude, longitude: longitude))
-            let circle = MTMapCircle()
-            circle.circleCenterPoint = userLocation
-            circle.circleLineColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-            circle.circleFillColor = UIColor(red: 0, green: 1, blue: 1, alpha: 0.1)
-            circle.circleRadius = 100
-            
-            mapView.addCircle(circle)
-            mapView.setMapCenter(userLocation, animated: true)
-            locationManager.stopUpdatingLocation()
         }
     }
 }
