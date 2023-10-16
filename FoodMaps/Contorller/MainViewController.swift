@@ -40,6 +40,17 @@ final class MainViewController: UIViewController {
         return button
     }()
     
+    private let listButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("목록", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 20
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     private var mapView = MTMapView()
     private var mapPointValue = MTMapPoint()
     private var locationManager = CLLocationManager()
@@ -48,7 +59,7 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        myLocation()
+        moveToMyLocation()
         setUpMap()
         setUpLocationManager()
         setUpSearchBarUI()
@@ -60,6 +71,8 @@ final class MainViewController: UIViewController {
         mapView.delegate = self
         mapView.baseMapType = .standard
         self.view.addSubview(mapView)
+        mapView.showCurrentLocationMarker = true
+        mapView.currentLocationTrackingMode = .onWithHeadingWithoutMapMoving
     }
     
     private func setUpSearchBarUI() {
@@ -67,7 +80,7 @@ final class MainViewController: UIViewController {
         searchBar.delegate = self
         
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 4),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -4)
         ])
@@ -76,8 +89,10 @@ final class MainViewController: UIViewController {
     private func setUpButton() {
         view.addSubview(currentLocationButton)
         view.addSubview(requestButton)
+        view.addSubview(listButton)
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
         requestButton.addTarget(self, action: #selector(requestButtonTapped), for: .touchUpInside)
+        listButton.addTarget(self, action: #selector(listButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             currentLocationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
@@ -88,19 +103,28 @@ final class MainViewController: UIViewController {
             requestButton.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 12),
             requestButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
             requestButton.widthAnchor.constraint(equalToConstant: 40),
-            requestButton.heightAnchor.constraint(equalToConstant: 40)
+            requestButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            listButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            listButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            listButton.widthAnchor.constraint(equalToConstant: 40),
+            listButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
     @objc func currentLocationButtonTapped() {
-        myLocation()
+        moveToMyLocation()
     }
     
     @objc func requestButtonTapped() {
         fetchLocationData()
     }
     
-    private func myLocation() {
+    @objc func listButtonTapped() {
+        showListView()
+    }
+    
+    private func moveToMyLocation() {
         if let location = locationManager.location?.coordinate {
             let userLocation = MTMapPoint(geoCoord: .init(latitude: location.latitude, longitude: location.longitude))
             mapView.setMapCenter(userLocation, animated: true)
@@ -128,21 +152,14 @@ final class MainViewController: UIViewController {
             if let latitude = Double(item.y), let longitude = Double(item.x) {
                 poiItem.mapPoint = MTMapPoint(geoCoord: .init(latitude: latitude, longitude: longitude))
             }
-            // 어짜피 초기값은 내위치로 오게되어있다. 로케이션 매니져로 인해서 그러니깐 이제 업데이트 될때 그좌표를 전역으로 넣고 그걸 여기서 변경하면 나타나지 않을까?
-            // 뷰하나 해서 나타나게 하자 그렇게해서 category_name ,distance(거리), place_name가게이름, 주소road_address_name 정도? 그럼 커스텀은? 그럼 알럿을 하나더? 아니면 수정으로 가거나 통신받은것은 그냥 상세뷰? 커스텀만 수정하게?
-            poiItem.markerType = .bluePin
+            poiItem.markerType = .yellowPin
             mapView.addPOIItems([poiItem])
         }
-        print("\(mapPointValue.mapPointGeo().longitude)  \(mapPointValue.mapPointGeo().latitude) 에드 마크")
     }
     
-    func mapView(_ mapView: MTMapView!, updateCurrentLocation location: MTMapPoint!, withAccuracy accuracy: MTMapLocationAccuracy) {
-        print("너 호출은 되니?")
-    }
-    
-    func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
-        mapPointValue = mapCenterPoint
-        print("\(mapPointValue.mapPointGeo().latitude)인스턴스   \(mapCenterPoint.mapPointGeo().latitude) 메서드 인스턴스")
+    private func showListView() {
+        let listViewController = ListViewController()
+        navigationController?.pushViewController(listViewController, animated: true)
     }
 }
 
@@ -205,11 +222,20 @@ extension MainViewController: MTMapViewDelegate {
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
     }
+    
+    func mapView(_ mapView: MTMapView!, updateCurrentLocation location: MTMapPoint!, withAccuracy accuracy: MTMapLocationAccuracy) {
+        print("위치가 업데이트 될때마다 호출")
+    }
+    
+    func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
+        mapPointValue = mapCenterPoint
+    }
 }
 
 extension MainViewController: CLLocationManagerDelegate {
     private func setUpLocationManager() {
         locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
         getLocationUsagePermission()
     }

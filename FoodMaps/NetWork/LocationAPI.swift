@@ -22,7 +22,7 @@ final class LocationAPI {
             URLQueryItem(name: "category_group_code", value: "FD6"),
             URLQueryItem(name: "x", value: "\(mapPoint.mapPointGeo().longitude)"),
             URLQueryItem(name: "y", value: "\(mapPoint.mapPointGeo().latitude)"),
-            URLQueryItem(name: "radius", value: "500"),
+            URLQueryItem(name: "radius", value: "20000"),
             URLQueryItem(name: "sort", value: "distance")
         ]
         
