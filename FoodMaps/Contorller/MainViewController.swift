@@ -29,6 +29,28 @@ final class MainViewController: UIViewController {
         return button
     }()
     
+    private let requestButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("맛집!", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 20
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let listButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("목록", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 20
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
     private var mapView = MTMapView()
     private var mapPointValue = MTMapPoint()
     private var locationManager = CLLocationManager()
@@ -37,12 +59,11 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        moveToMyLocation()
         setUpMap()
         setUpLocationManager()
         setUpSearchBarUI()
-        setUpCurrentButtonUI()
-        fetchLocationData()
+        setUpButton()
     }
     
     private func setUpMap() {
@@ -50,6 +71,8 @@ final class MainViewController: UIViewController {
         mapView.delegate = self
         mapView.baseMapType = .standard
         self.view.addSubview(mapView)
+        mapView.showCurrentLocationMarker = true
+        mapView.currentLocationTrackingMode = .onWithHeadingWithoutMapMoving
     }
     
     private func setUpSearchBarUI() {
@@ -57,46 +80,86 @@ final class MainViewController: UIViewController {
         searchBar.delegate = self
         
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 4),
+            searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 4),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -4)
         ])
     }
     
-    private func setUpCurrentButtonUI() {
+    private func setUpButton() {
         view.addSubview(currentLocationButton)
+        view.addSubview(requestButton)
+        view.addSubview(listButton)
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
+        requestButton.addTarget(self, action: #selector(requestButtonTapped), for: .touchUpInside)
+        listButton.addTarget(self, action: #selector(listButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             currentLocationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
             currentLocationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
             currentLocationButton.widthAnchor.constraint(equalToConstant: 40),
-            currentLocationButton.heightAnchor.constraint(equalToConstant: 40)
+            currentLocationButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            requestButton.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 12),
+            requestButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            requestButton.widthAnchor.constraint(equalToConstant: 40),
+            requestButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            listButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            listButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            listButton.widthAnchor.constraint(equalToConstant: 40),
+            listButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
     @objc func currentLocationButtonTapped() {
+        moveToMyLocation()
+    }
+    
+    @objc func requestButtonTapped() {
+        fetchLocationData()
+    }
+    
+    @objc func listButtonTapped() {
+        showListView()
+    }
+    
+    private func moveToMyLocation() {
         if let location = locationManager.location?.coordinate {
             let userLocation = MTMapPoint(geoCoord: .init(latitude: location.latitude, longitude: location.longitude))
-            let userMarker = MTMapPOIItem()
-            
-            userMarker.itemName = "나의 위치"
-            userMarker.mapPoint = userLocation
-            userMarker.markerType = .bluePin
-            mapView.addPOIItems([userMarker])
             mapView.setMapCenter(userLocation, animated: true)
         }
     }
     
     private func fetchLocationData() {
-        locationNetWork.getLocation(by: mapPointValue) { result in
+        locationNetWork.getLocation(by: mapPointValue) { [weak self] result in
             switch result {
             case .success(let locationData):
-                print(locationData)
+                self?.addMarkers(for: locationData)
             case .failure(let error):
                 print(error)
             }
         }
+        mapView.removeAllPOIItems()
+        let customPins = restaurantItems.map { $0.poiItem }
+        mapView.addPOIItems(customPins)
+    }
+    
+    private func addMarkers(for locationData: LocationData) {
+        for item in locationData.documents {
+            let poiItem = MTMapPOIItem()
+            poiItem.itemName = item.placeName
+            if let latitude = Double(item.y), let longitude = Double(item.x) {
+                poiItem.mapPoint = MTMapPoint(geoCoord: .init(latitude: latitude, longitude: longitude))
+            }
+            poiItem.markerType = .yellowPin
+            mapView.addPOIItems([poiItem])
+        }
+    }
+    
+    private func showListView() {
+        let listViewController = ListViewController()
+        navigationController?.pushViewController(listViewController, animated: true)
     }
 }
 
@@ -117,8 +180,10 @@ extension MainViewController: UISearchBarDelegate {
         if searchText.isEmpty {
             filteredPoiItems = restaurantItems.map { $0.poiItem }
         } else {
-            filteredPoiItems = restaurantItems.filter {
-                $0.poiItem.itemName.lowercased().contains(searchText.lowercased())
+            filteredPoiItems = restaurantItems.filter { restaurant in
+                let itemName = restaurant.poiItem.itemName.lowercased()
+                let lowercasedSearchText = searchText.lowercased()
+                return itemName.contains(lowercasedSearchText)
             }.map { $0.poiItem }
         }
         
@@ -157,11 +222,20 @@ extension MainViewController: MTMapViewDelegate {
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
     }
+    
+    func mapView(_ mapView: MTMapView!, updateCurrentLocation location: MTMapPoint!, withAccuracy accuracy: MTMapLocationAccuracy) {
+        print("위치가 업데이트 될때마다 호출")
+    }
+    
+    func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTMapPoint!) {
+        mapPointValue = mapCenterPoint
+    }
 }
 
 extension MainViewController: CLLocationManagerDelegate {
     private func setUpLocationManager() {
         locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
         getLocationUsagePermission()
     }
@@ -184,21 +258,6 @@ extension MainViewController: CLLocationManagerDelegate {
             print("GPS:Default")
         }
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            let latitude = location.coordinate.latitude
-            let longitude = location.coordinate.longitude
-            let userLocation = MTMapPoint(geoCoord: .init(latitude: latitude, longitude: longitude))
-            let userMarker = MTMapPOIItem()
-            
-            userMarker.itemName = "나의 위치"
-            userMarker.mapPoint = userLocation
-            userMarker.markerType = .bluePin
-            mapView.addPOIItems([userMarker])
-            mapView.setMapCenter(userLocation, animated: true)
-        }
-    }
 }
 
 extension MainViewController: AddRestaurant {
@@ -211,13 +270,17 @@ extension MainViewController: AddRestaurant {
         
         switch category {
         case .korean:
-            newPoint.markerType = .redPin
+            newPoint.markerType = .customImage
+            newPoint.customImage = UIImage(named: "한국")
         case .chinese:
-            newPoint.markerType = .bluePin
+            newPoint.markerType = .customImage
+            newPoint.customImage = UIImage(named: "중국")
         case .japanese:
-            newPoint.markerType = .yellowPin
+            newPoint.markerType = .customImage
+            newPoint.customImage = UIImage(named: "일본")
         case .western:
-            newPoint.markerType = .yellowPin
+            newPoint.markerType = .customImage
+            newPoint.customImage = UIImage(named: "미국")
         }
         
         if let lastIndex = restaurantItems.last?.poiItem.tag {
@@ -243,16 +306,21 @@ extension MainViewController: AddRestaurant {
         
         switch category {
         case .korean:
-            modifiedPOIItem.markerType = .redPin
+            modifiedPOIItem.markerType = .customImage
+            modifiedPOIItem.customImage = UIImage(named: "한국")
         case .chinese:
-            modifiedPOIItem.markerType = .bluePin
+            modifiedPOIItem.markerType = .customImage
+            modifiedPOIItem.customImage = UIImage(named: "중국")
         case .japanese:
-            modifiedPOIItem.markerType = .yellowPin
+            modifiedPOIItem.markerType = .customImage
+            modifiedPOIItem.customImage = UIImage(named: "일본")
         case .western:
-            modifiedPOIItem.markerType = .yellowPin
+            modifiedPOIItem.markerType = .customImage
+            modifiedPOIItem.customImage = UIImage(named: "미국")
         }
         
         mapView.addPOIItems(restaurantItems.map{$0.poiItem})
+        mapView.select(modifiedPOIItem, animated: true)
         mapView.updateConstraints()
     }
     

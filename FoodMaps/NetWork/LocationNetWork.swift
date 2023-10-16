@@ -13,7 +13,7 @@ final class LocationNetWork {
         self.session = session
     }
     
-    func getLocation(by mapPoint: MTMapPoint, completion: @escaping (Result<LocationData, Error>) -> Void) {
+    func getLocation(by mapPoint: MTMapPoint, completion: @escaping (Result<LocationData, URLError>) -> Void) {
         guard let url = api.getLocation(by: mapPoint).url else {
             completion(.failure(URLError(.badURL)))
             return
