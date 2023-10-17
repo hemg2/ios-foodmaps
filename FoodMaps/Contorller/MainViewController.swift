@@ -135,6 +135,7 @@ final class MainViewController: UIViewController {
         locationNetWork.getLocation(by: mapPointValue) { [weak self] result in
             switch result {
             case .success(let locationData):
+                DataManager.shared.locationData = locationData
                 self?.addMarkers(for: locationData)
             case .failure(let error):
                 print(error)
