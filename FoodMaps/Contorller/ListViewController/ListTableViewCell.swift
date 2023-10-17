@@ -85,7 +85,7 @@ final class ListTableViewCell: UITableViewCell {
     
     func setModel(title: String, category: String, address: String, distance: String) {
         titleLabel.text = title
-        categoryNameLabel.text = category
+        categoryNameLabel.text = cleanCategoryName(category)
         addressNameLabel.text = address
         distanceLabel.text = "\(addDistance(distance: distance))M"
     }
@@ -95,5 +95,13 @@ final class ListTableViewCell: UITableViewCell {
             return Int(intDistance * 2)
         }
         return 0
+    }
+    
+    private func cleanCategoryName(_ category: String) -> String {
+        let prefixToRemove = "음식점 > "
+        if category.hasPrefix(prefixToRemove) {
+            return String(category.dropFirst(prefixToRemove.count))
+        }
+        return category
     }
 }
