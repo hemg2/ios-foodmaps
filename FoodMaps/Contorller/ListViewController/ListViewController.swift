@@ -45,7 +45,7 @@ final class ListViewController: UIViewController {
     }
     
     private func fetchLocationData() {
-        self.locationData = DataManager.shared.locationData
+        self.locationData = LocationDataManager.shared.locationData
         tableView.reloadData()
     }
 }

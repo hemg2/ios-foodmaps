@@ -140,7 +140,7 @@ final class MainViewController: UIViewController {
                 
                 switch decodingData {
                 case .success(let locationData):
-                    DataManager.shared.locationData = locationData
+                    LocationDataManager.shared.locationData = locationData
                     self.addMarkers(for: locationData)
                 case .failure(let error):
                     print(error)
