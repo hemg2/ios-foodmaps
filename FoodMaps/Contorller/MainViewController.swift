@@ -80,7 +80,7 @@ final class MainViewController: UIViewController {
         searchBar.delegate = self
         
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 4),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -4)
         ])
