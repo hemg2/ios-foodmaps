@@ -13,7 +13,7 @@ final class LocationNetWork {
         self.session = session
     }
     
-    func getLocation(by mapPoint: MTMapPoint, completion: @escaping (Result<LocationData, URLError>) -> Void) {
+    func getLocation(by mapPoint: MTMapPoint, completion: @escaping (Result<Data, URLError>) -> Void) {
         guard let url = api.getLocation(by: mapPoint).url else {
             completion(.failure(URLError(.badURL)))
             return
@@ -24,16 +24,18 @@ final class LocationNetWork {
         session.dataTask(with: request) { data, _, error in
             if error != nil {
                 completion(.failure(URLError(.cannotLoadFromNetwork)))
-            }
-            
-            if let data = data {
-                do {
-                    let locationData = try JSONDecoder().decode(LocationData.self, from: data)
-                    completion(.success(locationData))
-                } catch {
-                    completion(.failure(URLError(.cannotParseResponse)))
-                }
+            } else if let data = data {
+                completion(.success(data))
             }
         }.resume()
+    }
+    
+    func decodeLocationData(data: Data) -> Result<LocationData, URLError> {
+        do {
+            let locationData = try JSONDecoder().decode(LocationData.self, from: data)
+            return .success(locationData)
+        } catch {
+            return .failure(URLError(.cannotParseResponse))
+        }
     }
 }
