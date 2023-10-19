@@ -29,12 +29,45 @@ final class MainViewController: UIViewController {
         return button
     }()
     
-    private let requestButton: UIButton = {
+    private let foodStoreButton: UIButton = {
         let button = UIButton()
         button.setTitle("맛집!", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let cafeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("카페", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let convenienceStoreButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("편의점", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let parkingButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("주차장", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -88,10 +121,17 @@ final class MainViewController: UIViewController {
     
     private func setUpButton() {
         view.addSubview(currentLocationButton)
-        view.addSubview(requestButton)
+        view.addSubview(foodStoreButton)
+        view.addSubview(cafeButton)
+        view.addSubview(convenienceStoreButton)
+        view.addSubview(parkingButton)
         view.addSubview(listButton)
+        
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
-        requestButton.addTarget(self, action: #selector(requestButtonTapped), for: .touchUpInside)
+        foodStoreButton.addTarget(self, action: #selector(requestFoodStoreButtonTapped), for: .touchUpInside)
+        cafeButton.addTarget(self, action: #selector(requestCafeButtonTapped), for: .touchUpInside)
+        convenienceStoreButton.addTarget(self, action: #selector(requestConvenienceButtonTapped), for: .touchUpInside)
+        parkingButton.addTarget(self, action: #selector(requestParkingButtonTapped), for: .touchUpInside)
         listButton.addTarget(self, action: #selector(listButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -100,10 +140,25 @@ final class MainViewController: UIViewController {
             currentLocationButton.widthAnchor.constraint(equalToConstant: 40),
             currentLocationButton.heightAnchor.constraint(equalToConstant: 40),
             
-            requestButton.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 12),
-            requestButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-            requestButton.widthAnchor.constraint(equalToConstant: 40),
-            requestButton.heightAnchor.constraint(equalToConstant: 40),
+            foodStoreButton.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 12),
+            foodStoreButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            foodStoreButton.widthAnchor.constraint(equalToConstant: 50),
+            foodStoreButton.heightAnchor.constraint(equalToConstant: 20),
+            
+            cafeButton.centerYAnchor.constraint(equalTo: foodStoreButton.centerYAnchor),
+            cafeButton.leadingAnchor.constraint(equalTo: foodStoreButton.trailingAnchor, constant: 12),
+            cafeButton.widthAnchor.constraint(equalToConstant: 50),
+            cafeButton.heightAnchor.constraint(equalToConstant: 20),
+            
+            convenienceStoreButton.centerYAnchor.constraint(equalTo: foodStoreButton.centerYAnchor),
+            convenienceStoreButton.leadingAnchor.constraint(equalTo: cafeButton.trailingAnchor, constant: 12),
+            convenienceStoreButton.widthAnchor.constraint(equalToConstant: 50),
+            convenienceStoreButton.heightAnchor.constraint(equalToConstant: 20),
+            
+            parkingButton.centerYAnchor.constraint(equalTo: foodStoreButton.centerYAnchor),
+            parkingButton.leadingAnchor.constraint(equalTo: convenienceStoreButton.trailingAnchor, constant: 12),
+            parkingButton.widthAnchor.constraint(equalToConstant: 50),
+            parkingButton.heightAnchor.constraint(equalToConstant: 20),
             
             listButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
             listButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
@@ -116,8 +171,20 @@ final class MainViewController: UIViewController {
         moveToMyLocation()
     }
     
-    @objc func requestButtonTapped() {
+    @objc func requestFoodStoreButtonTapped() {
         fetchLocationData(category: CategoryNamespace.foodStore)
+    }
+    
+    @objc func requestCafeButtonTapped() {
+        fetchLocationData(category: CategoryNamespace.cafe)
+    }
+    
+    @objc func requestConvenienceButtonTapped() {
+        fetchLocationData(category: CategoryNamespace.convenienceStore)
+    }
+    
+    @objc func requestParkingButtonTapped() {
+        fetchLocationData(category: CategoryNamespace.parking)
     }
     
     @objc func listButtonTapped() {
