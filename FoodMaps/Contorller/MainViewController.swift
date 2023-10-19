@@ -117,7 +117,7 @@ final class MainViewController: UIViewController {
     }
     
     @objc func requestButtonTapped() {
-        fetchLocationData()
+        fetchLocationData(category: CategoryNamespace.foodStore)
     }
     
     @objc func listButtonTapped() {
@@ -131,8 +131,8 @@ final class MainViewController: UIViewController {
         }
     }
     
-    private func fetchLocationData() {
-        locationNetWork.getLocation(by: mapPointValue) { [weak self] result in
+    private func fetchLocationData(category: String) {
+        locationNetWork.getLocation(by: mapPointValue, categoryValue: category) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let data):

@@ -61,6 +61,7 @@
 		63ED4C932ADE85E20000F429 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C922ADE85E20000F429 /* ListTableViewCell.swift */; };
 		63ED4C952ADEA5520000F429 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C942ADEA5520000F429 /* LocationDataManager.swift */; };
 		63ED4C972AE049C60000F429 /* DaumMap.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63ED4C962AE049C60000F429 /* DaumMap.xcframework */; };
+		63ED4C9A2AE0C24F0000F429 /* CategoryNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +130,7 @@
 		63ED4C922ADE85E20000F429 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		63ED4C942ADEA5520000F429 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 		63ED4C962AE049C60000F429 /* DaumMap.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DaumMap.xcframework; path = ../../Downloads/DaumMap.xcframework; sourceTree = "<group>"; };
+		63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNamespace.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				63ED4C852AD91E400000F429 /* Keys.plist */,
 				63BFBF182AD39286004150C7 /* Info.plist */,
 				63BFC6842AD3A5D4004150C7 /* BridgingHeader.h */,
+				63ED4C982AE0C20E0000F429 /* Namespace */,
 				63ED4C6D2AD8E00E0000F429 /* NetWork */,
 				63ED4C722AD8E10B0000F429 /* Entity */,
 				63EA0DB82AD63A76001585EA /* Model */,
@@ -334,6 +337,14 @@
 			path = ListViewController;
 			sourceTree = "<group>";
 		};
+		63ED4C982AE0C20E0000F429 /* Namespace */ = {
+			isa = PBXGroup;
+			children = (
+				63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */,
+			);
+			path = Namespace;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -444,6 +455,7 @@
 				63EA0DB72AD639DD001585EA /* AddViewController+.swift in Sources */,
 				63EA0DB52AD632B1001585EA /* AddViewController.swift in Sources */,
 				63BFBF0D2AD39284004150C7 /* SceneDelegate.swift in Sources */,
+				63ED4C9A2AE0C24F0000F429 /* CategoryNamespace.swift in Sources */,
 				63ED4C7D2AD8E5450000F429 /* APIKey.swift in Sources */,
 				63ED4C712AD8E0520000F429 /* LocationAPI.swift in Sources */,
 				63ED4C932ADE85E20000F429 /* ListTableViewCell.swift in Sources */,
