@@ -97,6 +97,7 @@ final class MainViewController: UIViewController {
         setUpLocationManager()
         setUpSearchBarUI()
         setUpButton()
+        setUpButtonAction()
     }
     
     private func setUpMap() {
@@ -126,13 +127,6 @@ final class MainViewController: UIViewController {
         view.addSubview(convenienceStoreButton)
         view.addSubview(parkingButton)
         view.addSubview(listButton)
-        
-        currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
-        foodStoreButton.addTarget(self, action: #selector(requestFoodStoreButtonTapped), for: .touchUpInside)
-        cafeButton.addTarget(self, action: #selector(requestCafeButtonTapped), for: .touchUpInside)
-        convenienceStoreButton.addTarget(self, action: #selector(requestConvenienceButtonTapped), for: .touchUpInside)
-        parkingButton.addTarget(self, action: #selector(requestParkingButtonTapped), for: .touchUpInside)
-        listButton.addTarget(self, action: #selector(listButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             currentLocationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
@@ -167,28 +161,37 @@ final class MainViewController: UIViewController {
         ])
     }
     
-    @objc func currentLocationButtonTapped() {
-        moveToMyLocation()
-    }
-    
-    @objc func requestFoodStoreButtonTapped() {
-        fetchLocationData(category: CategoryNamespace.foodStore)
-    }
-    
-    @objc func requestCafeButtonTapped() {
-        fetchLocationData(category: CategoryNamespace.cafe)
-    }
-    
-    @objc func requestConvenienceButtonTapped() {
-        fetchLocationData(category: CategoryNamespace.convenienceStore)
-    }
-    
-    @objc func requestParkingButtonTapped() {
-        fetchLocationData(category: CategoryNamespace.parking)
-    }
-    
-    @objc func listButtonTapped() {
-        showListView()
+    private func setUpButtonAction() {
+        let locationAction = UIAction { [weak self] _ in
+            self?.moveToMyLocation()
+        }
+        currentLocationButton.addAction(locationAction, for: .touchUpInside)
+        
+        let foodStoreAction = UIAction { [weak self] _ in
+            self?.fetchLocationData(category: CategoryNamespace.foodStore)
+        }
+        foodStoreButton.addAction(foodStoreAction, for: .touchUpInside)
+        
+        let cafeAction = UIAction { [weak self] _ in
+            self?.fetchLocationData(category: CategoryNamespace.cafe)
+            
+        }
+        cafeButton.addAction(cafeAction, for: .touchUpInside)
+        
+        let convenienceAction = UIAction { [weak self] _ in
+            self?.fetchLocationData(category: CategoryNamespace.convenienceStore)
+        }
+        convenienceStoreButton.addAction(convenienceAction, for: .touchUpInside)
+        
+        let parkingAction = UIAction { [weak self] _ in
+            self?.fetchLocationData(category: CategoryNamespace.parking)
+        }
+        parkingButton.addAction(parkingAction, for: .touchUpInside)
+        
+        let listAction = UIAction { [weak self] _ in
+            self?.showListView()
+        }
+        listButton.addAction(listAction, for: .touchUpInside)
     }
     
     private func moveToMyLocation() {
