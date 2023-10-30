@@ -62,6 +62,7 @@
 		63ED4C952ADEA5520000F429 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C942ADEA5520000F429 /* LocationDataManager.swift */; };
 		63ED4C972AE049C60000F429 /* DaumMap.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63ED4C962AE049C60000F429 /* DaumMap.xcframework */; };
 		63ED4C9A2AE0C24F0000F429 /* CategoryNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */; };
+		63ED4C9F2AEA7E5A0000F429 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C9E2AEA7E5A0000F429 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +132,7 @@
 		63ED4C942ADEA5520000F429 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 		63ED4C962AE049C60000F429 /* DaumMap.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DaumMap.xcframework; path = ../../Downloads/DaumMap.xcframework; sourceTree = "<group>"; };
 		63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNamespace.swift; sourceTree = "<group>"; };
+		63ED4C9E2AEA7E5A0000F429 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +278,7 @@
 		63EA0DB32AD63260001585EA /* Contorller */ = {
 			isa = PBXGroup;
 			children = (
+				63ED4C9D2AEA7E4A0000F429 /* View */,
 				63BFBF0E2AD39284004150C7 /* MainViewController.swift */,
 				63EA0DBE2AD63E74001585EA /* AddViewController */,
 				63ED4C8D2ADCFAB20000F429 /* ListViewController */,
@@ -343,6 +346,14 @@
 				63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */,
 			);
 			path = Namespace;
+			sourceTree = "<group>";
+		};
+		63ED4C9D2AEA7E4A0000F429 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				63ED4C9E2AEA7E5A0000F429 /* MainView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,6 +465,7 @@
 				63ED4C6F2AD8E0260000F429 /* LocationNetWork.swift in Sources */,
 				63EA0DB72AD639DD001585EA /* AddViewController+TextViewDelegate.swift in Sources */,
 				63EA0DB52AD632B1001585EA /* AddViewController.swift in Sources */,
+				63ED4C9F2AEA7E5A0000F429 /* MainView.swift in Sources */,
 				63BFBF0D2AD39284004150C7 /* SceneDelegate.swift in Sources */,
 				63ED4C9A2AE0C24F0000F429 /* CategoryNamespace.swift in Sources */,
 				63ED4C7D2AD8E5450000F429 /* APIKey.swift in Sources */,
