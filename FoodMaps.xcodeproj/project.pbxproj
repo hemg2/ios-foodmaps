@@ -47,19 +47,22 @@
 		63BFC67F2AD3A535004150C7 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC67E2AD3A535004150C7 /* libc++.tbd */; };
 		63BFC6812AD3A53F004150C7 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC6802AD3A53F004150C7 /* libxml2.tbd */; };
 		63BFC6832AD3A54E004150C7 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC6822AD3A54E004150C7 /* libsqlite3.tbd */; };
-		63BFC6862AD3A973004150C7 /* DaumMap.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC6852AD3A973004150C7 /* DaumMap.xcframework */; };
 		63EA0DB52AD632B1001585EA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA0DB42AD632B1001585EA /* AddViewController.swift */; };
-		63EA0DB72AD639DD001585EA /* AddViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA0DB62AD639DD001585EA /* AddViewController+.swift */; };
+		63EA0DB72AD639DD001585EA /* AddViewController+TextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA0DB62AD639DD001585EA /* AddViewController+TextViewDelegate.swift */; };
 		63EA0DBA2AD63A86001585EA /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA0DB92AD63A86001585EA /* Restaurant.swift */; };
 		63ED4C6F2AD8E0260000F429 /* LocationNetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C6E2AD8E0260000F429 /* LocationNetWork.swift */; };
 		63ED4C712AD8E0520000F429 /* LocationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C702AD8E0520000F429 /* LocationAPI.swift */; };
 		63ED4C742AD8E1AA0000F429 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C732AD8E1AA0000F429 /* LocationData.swift */; };
 		63ED4C762AD8E1C00000F429 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C752AD8E1C00000F429 /* Document.swift */; };
-		63ED4C782AD8E1D50000F429 /* DetailListCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C772AD8E1D50000F429 /* DetailListCellData.swift */; };
 		63ED4C7B2AD8E2140000F429 /* MapViewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C7A2AD8E2140000F429 /* MapViewError.swift */; };
 		63ED4C7D2AD8E5450000F429 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C7C2AD8E5450000F429 /* APIKey.swift */; };
 		63ED4C862AD91E400000F429 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63ED4C852AD91E400000F429 /* Keys.plist */; };
 		63ED4C912ADCFB280000F429 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C902ADCFB280000F429 /* ListViewController.swift */; };
+		63ED4C932ADE85E20000F429 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C922ADE85E20000F429 /* ListTableViewCell.swift */; };
+		63ED4C952ADEA5520000F429 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C942ADEA5520000F429 /* LocationDataManager.swift */; };
+		63ED4C972AE049C60000F429 /* DaumMap.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63ED4C962AE049C60000F429 /* DaumMap.xcframework */; };
+		63ED4C9A2AE0C24F0000F429 /* CategoryNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */; };
+		63ED4C9F2AEA7E5A0000F429 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C9E2AEA7E5A0000F429 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,19 +117,22 @@
 		63BFC6802AD3A53F004150C7 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		63BFC6822AD3A54E004150C7 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		63BFC6842AD3A5D4004150C7 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
-		63BFC6852AD3A973004150C7 /* DaumMap.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DaumMap.xcframework; path = ../../Downloads/DaumMap.xcframework; sourceTree = "<group>"; };
 		63EA0DB42AD632B1001585EA /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
-		63EA0DB62AD639DD001585EA /* AddViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddViewController+.swift"; sourceTree = "<group>"; };
+		63EA0DB62AD639DD001585EA /* AddViewController+TextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddViewController+TextViewDelegate.swift"; sourceTree = "<group>"; };
 		63EA0DB92AD63A86001585EA /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		63ED4C6E2AD8E0260000F429 /* LocationNetWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationNetWork.swift; sourceTree = "<group>"; };
 		63ED4C702AD8E0520000F429 /* LocationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAPI.swift; sourceTree = "<group>"; };
 		63ED4C732AD8E1AA0000F429 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
 		63ED4C752AD8E1C00000F429 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
-		63ED4C772AD8E1D50000F429 /* DetailListCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListCellData.swift; sourceTree = "<group>"; };
 		63ED4C7A2AD8E2140000F429 /* MapViewError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewError.swift; sourceTree = "<group>"; };
 		63ED4C7C2AD8E5450000F429 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		63ED4C852AD91E400000F429 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		63ED4C902ADCFB280000F429 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		63ED4C922ADE85E20000F429 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		63ED4C942ADEA5520000F429 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
+		63ED4C962AE049C60000F429 /* DaumMap.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DaumMap.xcframework; path = ../../Downloads/DaumMap.xcframework; sourceTree = "<group>"; };
+		63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNamespace.swift; sourceTree = "<group>"; };
+		63ED4C9E2AEA7E5A0000F429 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +146,7 @@
 				63BFC67D2AD3A525004150C7 /* QuartzCore.framework in Frameworks */,
 				63BFC67B2AD3A51D004150C7 /* CoreLocation.framework in Frameworks */,
 				63BFC6792AD3A513004150C7 /* SystemConfiguration.framework in Frameworks */,
-				63BFC6862AD3A973004150C7 /* DaumMap.xcframework in Frameworks */,
+				63ED4C972AE049C60000F429 /* DaumMap.xcframework in Frameworks */,
 				63BFC6772AD3A504004150C7 /* OpenGLES.framework in Frameworks */,
 				63BFC6742AD3A4D4004150C7 /* DaumMap.framework in Frameworks */,
 			);
@@ -172,6 +178,7 @@
 				63ED4C852AD91E400000F429 /* Keys.plist */,
 				63BFBF182AD39286004150C7 /* Info.plist */,
 				63BFC6842AD3A5D4004150C7 /* BridgingHeader.h */,
+				63ED4C982AE0C20E0000F429 /* Namespace */,
 				63ED4C6D2AD8E00E0000F429 /* NetWork */,
 				63ED4C722AD8E10B0000F429 /* Entity */,
 				63EA0DB82AD63A76001585EA /* Model */,
@@ -254,7 +261,7 @@
 				63BFC67A2AD3A51D004150C7 /* CoreLocation.framework */,
 				63BFC6782AD3A512004150C7 /* SystemConfiguration.framework */,
 				63BFC6762AD3A504004150C7 /* OpenGLES.framework */,
-				63BFC6852AD3A973004150C7 /* DaumMap.xcframework */,
+				63ED4C962AE049C60000F429 /* DaumMap.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -271,6 +278,7 @@
 		63EA0DB32AD63260001585EA /* Contorller */ = {
 			isa = PBXGroup;
 			children = (
+				63ED4C9D2AEA7E4A0000F429 /* View */,
 				63BFBF0E2AD39284004150C7 /* MainViewController.swift */,
 				63EA0DBE2AD63E74001585EA /* AddViewController */,
 				63ED4C8D2ADCFAB20000F429 /* ListViewController */,
@@ -282,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				63EA0DB92AD63A86001585EA /* Restaurant.swift */,
+				63ED4C942ADEA5520000F429 /* LocationDataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -290,7 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				63EA0DB42AD632B1001585EA /* AddViewController.swift */,
-				63EA0DB62AD639DD001585EA /* AddViewController+.swift */,
+				63EA0DB62AD639DD001585EA /* AddViewController+TextViewDelegate.swift */,
 			);
 			path = AddViewController;
 			sourceTree = "<group>";
@@ -310,7 +319,6 @@
 			children = (
 				63ED4C732AD8E1AA0000F429 /* LocationData.swift */,
 				63ED4C752AD8E1C00000F429 /* Document.swift */,
-				63ED4C772AD8E1D50000F429 /* DetailListCellData.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -327,8 +335,25 @@
 			isa = PBXGroup;
 			children = (
 				63ED4C902ADCFB280000F429 /* ListViewController.swift */,
+				63ED4C922ADE85E20000F429 /* ListTableViewCell.swift */,
 			);
 			path = ListViewController;
+			sourceTree = "<group>";
+		};
+		63ED4C982AE0C20E0000F429 /* Namespace */ = {
+			isa = PBXGroup;
+			children = (
+				63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */,
+			);
+			path = Namespace;
+			sourceTree = "<group>";
+		};
+		63ED4C9D2AEA7E4A0000F429 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				63ED4C9E2AEA7E5A0000F429 /* MainView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +455,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63ED4C742AD8E1AA0000F429 /* LocationData.swift in Sources */,
+				63ED4C952ADEA5520000F429 /* LocationDataManager.swift in Sources */,
 				63ED4C7B2AD8E2140000F429 /* MapViewError.swift in Sources */,
 				63BFBF0F2AD39284004150C7 /* MainViewController.swift in Sources */,
 				63BFBF0B2AD39284004150C7 /* AppDelegate.swift in Sources */,
@@ -437,12 +463,14 @@
 				63ED4C762AD8E1C00000F429 /* Document.swift in Sources */,
 				63ED4C912ADCFB280000F429 /* ListViewController.swift in Sources */,
 				63ED4C6F2AD8E0260000F429 /* LocationNetWork.swift in Sources */,
-				63EA0DB72AD639DD001585EA /* AddViewController+.swift in Sources */,
+				63EA0DB72AD639DD001585EA /* AddViewController+TextViewDelegate.swift in Sources */,
 				63EA0DB52AD632B1001585EA /* AddViewController.swift in Sources */,
+				63ED4C9F2AEA7E5A0000F429 /* MainView.swift in Sources */,
 				63BFBF0D2AD39284004150C7 /* SceneDelegate.swift in Sources */,
-				63ED4C782AD8E1D50000F429 /* DetailListCellData.swift in Sources */,
+				63ED4C9A2AE0C24F0000F429 /* CategoryNamespace.swift in Sources */,
 				63ED4C7D2AD8E5450000F429 /* APIKey.swift in Sources */,
 				63ED4C712AD8E0520000F429 /* LocationAPI.swift in Sources */,
+				63ED4C932ADE85E20000F429 /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

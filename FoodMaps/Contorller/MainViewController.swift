@@ -9,140 +9,85 @@ import UIKit
 import CoreLocation
 
 final class MainViewController: UIViewController {
-    private let searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.searchBarStyle = .minimal
-        searchBar.backgroundColor = .white
-        searchBar.placeholder = "식당 검색"
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        
-        return searchBar
-    }()
-    
-    private let currentLocationButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "location.fill"), for: .normal)
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 20
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
-    
-    private let requestButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("맛집!", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 20
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
-    
-    private let listButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("목록", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 20
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        return button
-    }()
-    
-    private var mapView = MTMapView()
+    private var mainView: MainView { view as! MainView }
     private var mapPointValue = MTMapPoint()
     private var locationManager = CLLocationManager()
     private var restaurantItems = [RestaurantItem]()
     private let locationNetWork = LocationNetWork()
     
+    override func loadView() {
+        view = MainView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         moveToMyLocation()
-        setUpMap()
         setUpLocationManager()
-        setUpSearchBarUI()
-        setUpButton()
+        setUpButtonAction()
     }
     
-    private func setUpMap() {
-        mapView = MTMapView(frame: self.view.frame)
-        mapView.delegate = self
-        mapView.baseMapType = .standard
-        self.view.addSubview(mapView)
-        mapView.showCurrentLocationMarker = true
-        mapView.currentLocationTrackingMode = .onWithHeadingWithoutMapMoving
-    }
-    
-    private func setUpSearchBarUI() {
-        view.addSubview(searchBar)
-        searchBar.delegate = self
+    private func setUpButtonAction() {
+        let locationAction = UIAction { [weak self] _ in
+            self?.moveToMyLocation()
+        }
+        mainView.currentLocationButton.addAction(locationAction, for: .touchUpInside)
         
-        NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 4),
-            searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -4)
-        ])
-    }
-    
-    private func setUpButton() {
-        view.addSubview(currentLocationButton)
-        view.addSubview(requestButton)
-        view.addSubview(listButton)
-        currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
-        requestButton.addTarget(self, action: #selector(requestButtonTapped), for: .touchUpInside)
-        listButton.addTarget(self, action: #selector(listButtonTapped), for: .touchUpInside)
+        let foodStoreAction = UIAction { [weak self] _ in
+            self?.fetchLocationData(category: CategoryNamespace.foodStore)
+        }
+        mainView.foodStoreButton.addAction(foodStoreAction, for: .touchUpInside)
         
-        NSLayoutConstraint.activate([
-            currentLocationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
-            currentLocationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-            currentLocationButton.widthAnchor.constraint(equalToConstant: 40),
-            currentLocationButton.heightAnchor.constraint(equalToConstant: 40),
+        let cafeAction = UIAction { [weak self] _ in
+            self?.fetchLocationData(category: CategoryNamespace.cafe)
             
-            requestButton.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 12),
-            requestButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-            requestButton.widthAnchor.constraint(equalToConstant: 40),
-            requestButton.heightAnchor.constraint(equalToConstant: 40),
-            
-            listButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
-            listButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
-            listButton.widthAnchor.constraint(equalToConstant: 40),
-            listButton.heightAnchor.constraint(equalToConstant: 40)
-        ])
-    }
-    
-    @objc func currentLocationButtonTapped() {
-        moveToMyLocation()
-    }
-    
-    @objc func requestButtonTapped() {
-        fetchLocationData()
-    }
-    
-    @objc func listButtonTapped() {
-        showListView()
+        }
+        mainView.cafeButton.addAction(cafeAction, for: .touchUpInside)
+        
+        let convenienceAction = UIAction { [weak self] _ in
+            self?.fetchLocationData(category: CategoryNamespace.convenienceStore)
+        }
+        mainView.convenienceStoreButton.addAction(convenienceAction, for: .touchUpInside)
+        
+        let parkingAction = UIAction { [weak self] _ in
+            self?.fetchLocationData(category: CategoryNamespace.parking)
+        }
+        mainView.parkingButton.addAction(parkingAction, for: .touchUpInside)
+        
+        let listAction = UIAction { [weak self] _ in
+            self?.showListView()
+        }
+        mainView.listButton.addAction(listAction, for: .touchUpInside)
     }
     
     private func moveToMyLocation() {
         if let location = locationManager.location?.coordinate {
             let userLocation = MTMapPoint(geoCoord: .init(latitude: location.latitude, longitude: location.longitude))
-            mapView.setMapCenter(userLocation, animated: true)
+            mainView.mapView.setMapCenter(userLocation, animated: true)
         }
     }
     
-    private func fetchLocationData() {
-        locationNetWork.getLocation(by: mapPointValue) { [weak self] result in
+    private func fetchLocationData(category: String) {
+        locationNetWork.getLocation(by: mapPointValue, categoryValue: category) { [weak self] result in
+            guard let self else { return }
             switch result {
-            case .success(let locationData):
-                self?.addMarkers(for: locationData)
+            case .success(let data):
+                let decodingData = self.locationNetWork.decodeLocationData(data: data)
+                
+                switch decodingData {
+                case .success(let locationData):
+                    LocationDataManager.shared.locationData = locationData
+                    self.addMarkers(for: locationData)
+                case .failure(let error):
+                    print(error)
+                }
+                
             case .failure(let error):
                 print(error)
             }
         }
-        mapView.removeAllPOIItems()
+        mainView.mapView.removeAllPOIItems()
         let customPins = restaurantItems.map { $0.poiItem }
-        mapView.addPOIItems(customPins)
+        mainView.mapView.addPOIItems(customPins)
     }
     
     private func addMarkers(for locationData: LocationData) {
@@ -153,7 +98,7 @@ final class MainViewController: UIViewController {
                 poiItem.mapPoint = MTMapPoint(geoCoord: .init(latitude: latitude, longitude: longitude))
             }
             poiItem.markerType = .yellowPin
-            mapView.addPOIItems([poiItem])
+            mainView.mapView.addPOIItems([poiItem])
         }
     }
     
@@ -174,7 +119,7 @@ extension MainViewController: UISearchBarDelegate {
     }
     
     private func updateMapView(with searchText: String) {
-        mapView.removeAllPOIItems()
+        mainView.mapView.removeAllPOIItems()
         let filteredPoiItems: [MTMapPOIItem]
         
         if searchText.isEmpty {
@@ -187,7 +132,7 @@ extension MainViewController: UISearchBarDelegate {
             }.map { $0.poiItem }
         }
         
-        mapView.addPOIItems(filteredPoiItems)
+        mainView.mapView.addPOIItems(filteredPoiItems)
     }
 }
 
@@ -291,8 +236,8 @@ extension MainViewController: AddRestaurant {
         
         let restaurantItem = RestaurantItem(restaurant: newRestaurants, poiItem: newPoint)
         restaurantItems.append(restaurantItem)
-        mapView.addPOIItems([newPoint])
-        mapView.setMapCenter(mapPointValue, zoomLevel: 2, animated: true)
+        mainView.mapView.addPOIItems([newPoint])
+        mainView.mapView.setMapCenter(mapPointValue, zoomLevel: 2, animated: true)
     }
     
     func didEditRestaurant(title: String, description: String, index: Int, category: RestaurantCategory) {
@@ -319,16 +264,16 @@ extension MainViewController: AddRestaurant {
             modifiedPOIItem.customImage = UIImage(named: "미국")
         }
         
-        mapView.addPOIItems(restaurantItems.map{$0.poiItem})
-        mapView.select(modifiedPOIItem, animated: true)
-        mapView.updateConstraints()
+        mainView.mapView.addPOIItems(restaurantItems.map{$0.poiItem})
+        mainView.mapView.select(modifiedPOIItem, animated: true)
+        mainView.mapView.updateConstraints()
     }
     
     func deletePin(withTag tag: Int) {
         guard tag >= 0 && tag < restaurantItems.count else { return }
         
         let poiItemToRemove = restaurantItems[tag].poiItem
-        mapView
+        mainView.mapView
             .removePOIItems([poiItemToRemove])
         restaurantItems.remove(at: tag)
         
