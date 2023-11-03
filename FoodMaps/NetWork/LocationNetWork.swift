@@ -13,7 +13,7 @@ final class LocationNetWork {
         self.session = session
     }
     
-    func getLocation(by mapPoint: MTMapPoint, categoryValue: String, completion: @escaping (Result<Data, URLError>) -> Void) {
+    func getLocation(by mapPoint: MTMapPoint, categoryValue: String, completion: @escaping (Result<LocationData, URLError>) -> Void) {
         guard let url = api.getLocation(by: mapPoint, categoryValue: categoryValue).url else {
             completion(.failure(URLError(.badURL)))
             return
@@ -24,18 +24,22 @@ final class LocationNetWork {
         session.dataTask(with: request) { data, _, error in
             if error != nil {
                 completion(.failure(URLError(.cannotLoadFromNetwork)))
-            } else if let data = data {
-                completion(.success(data))
+            }
+            
+            if let data = data {
+                
+                do {
+                    let locationData = try JSONDecoder().decode(LocationData.self, from: data)
+                    completion(.success(locationData))
+                } catch {
+                    completion(.failure(URLError(.cannotParseResponse)))
+                }
             }
         }.resume()
     }
-    
-    func decodeLocationData(data: Data) -> Result<LocationData, URLError> {
-        do {
-            let locationData = try JSONDecoder().decode(LocationData.self, from: data)
-            return .success(locationData)
-        } catch {
-            return .failure(URLError(.cannotParseResponse))
-        }
-    }
 }
+
+
+//https://dapi.kakao.com/v2/local/search/category.json?category_group_code=CS2&x=124.84848842774163&y=33.47496890088522&radius=20000&sort=distance
+
+//https://dapi.kakao.com/v2/local/search/category.json?category_group_code=FD6&x=127.055107449003&y=37.5876388514287&radius=20000&sort=distance

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6385BC622AF40D44005CDA61 /* DaumMap.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6385BC612AF40D44005CDA61 /* DaumMap.xcframework */; };
 		63BFBF0B2AD39284004150C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFBF0A2AD39284004150C7 /* AppDelegate.swift */; };
 		63BFBF0D2AD39284004150C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFBF0C2AD39284004150C7 /* SceneDelegate.swift */; };
 		63BFBF0F2AD39284004150C7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFBF0E2AD39284004150C7 /* MainViewController.swift */; };
@@ -60,12 +61,12 @@
 		63ED4C912ADCFB280000F429 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C902ADCFB280000F429 /* ListViewController.swift */; };
 		63ED4C932ADE85E20000F429 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C922ADE85E20000F429 /* ListTableViewCell.swift */; };
 		63ED4C952ADEA5520000F429 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C942ADEA5520000F429 /* LocationDataManager.swift */; };
-		63ED4C972AE049C60000F429 /* DaumMap.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63ED4C962AE049C60000F429 /* DaumMap.xcframework */; };
 		63ED4C9A2AE0C24F0000F429 /* CategoryNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */; };
 		63ED4C9F2AEA7E5A0000F429 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C9E2AEA7E5A0000F429 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6385BC612AF40D44005CDA61 /* DaumMap.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DaumMap.xcframework; path = ../Downloads/DaumMap.xcframework; sourceTree = "<group>"; };
 		63BFBF072AD39284004150C7 /* FoodMaps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodMaps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63BFBF0A2AD39284004150C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63BFBF0C2AD39284004150C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,7 +131,6 @@
 		63ED4C902ADCFB280000F429 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		63ED4C922ADE85E20000F429 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		63ED4C942ADEA5520000F429 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
-		63ED4C962AE049C60000F429 /* DaumMap.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DaumMap.xcframework; path = ../../Downloads/DaumMap.xcframework; sourceTree = "<group>"; };
 		63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNamespace.swift; sourceTree = "<group>"; };
 		63ED4C9E2AEA7E5A0000F429 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,7 +146,7 @@
 				63BFC67D2AD3A525004150C7 /* QuartzCore.framework in Frameworks */,
 				63BFC67B2AD3A51D004150C7 /* CoreLocation.framework in Frameworks */,
 				63BFC6792AD3A513004150C7 /* SystemConfiguration.framework in Frameworks */,
-				63ED4C972AE049C60000F429 /* DaumMap.xcframework in Frameworks */,
+				6385BC622AF40D44005CDA61 /* DaumMap.xcframework in Frameworks */,
 				63BFC6772AD3A504004150C7 /* OpenGLES.framework in Frameworks */,
 				63BFC6742AD3A4D4004150C7 /* DaumMap.framework in Frameworks */,
 			);
@@ -261,7 +261,7 @@
 				63BFC67A2AD3A51D004150C7 /* CoreLocation.framework */,
 				63BFC6782AD3A512004150C7 /* SystemConfiguration.framework */,
 				63BFC6762AD3A504004150C7 /* OpenGLES.framework */,
-				63ED4C962AE049C60000F429 /* DaumMap.xcframework */,
+				6385BC612AF40D44005CDA61 /* DaumMap.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -633,6 +633,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.hemg2.FoodMaps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/a1/ios-foodmaps/FoodMaps/BridgingHeader.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -667,6 +668,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.hemg2.FoodMaps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/a1/ios-foodmaps/FoodMaps/BridgingHeader.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

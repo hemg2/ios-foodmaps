@@ -39,7 +39,6 @@ final class MainViewController: UIViewController {
         
         let cafeAction = UIAction { [weak self] _ in
             self?.fetchLocationData(category: CategoryNamespace.cafe)
-            
         }
         mainView.cafeButton.addAction(cafeAction, for: .touchUpInside)
         
@@ -70,17 +69,9 @@ final class MainViewController: UIViewController {
         locationNetWork.getLocation(by: mapPointValue, categoryValue: category) { [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let data):
-                let decodingData = self.locationNetWork.decodeLocationData(data: data)
-                
-                switch decodingData {
-                case .success(let locationData):
-                    LocationDataManager.shared.locationData = locationData
-                    self.addMarkers(for: locationData)
-                case .failure(let error):
-                    print(error)
-                }
-                
+            case .success(let locationData):
+                LocationDataManager.shared.locationData = locationData
+                self.addMarkers(for: locationData)
             case .failure(let error):
                 print(error)
             }
