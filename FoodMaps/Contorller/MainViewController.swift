@@ -9,60 +9,195 @@ import UIKit
 import CoreLocation
 
 final class MainViewController: UIViewController {
-    private var mainView: MainView { view as! MainView }
+    private let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.searchBarStyle = .minimal
+        searchBar.backgroundColor = .white
+        searchBar.placeholder = "식당 검색"
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        
+        return searchBar
+    }()
+    
+    private let currentLocationButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "location.fill"), for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 20
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let foodStoreButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("맛집!", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let cafeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("카페", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let convenienceStoreButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("편의점", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let parkingButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("주차장", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private let listButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("목록", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 20
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private var mapView = MTMapView()
     private var mapPointValue = MTMapPoint()
     private var locationManager = CLLocationManager()
     private var restaurantItems = [RestaurantItem]()
     private let locationNetWork = LocationNetWork()
     
-    override func loadView() {
-        view = MainView()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         moveToMyLocation()
+        setUpMap()
         setUpLocationManager()
+        setUpSearchBarUI()
+        setUpButton()
         setUpButtonAction()
+    }
+    
+    private func setUpMap() {
+        mapView = MTMapView(frame: self.view.frame)
+        mapView.delegate = self
+        mapView.baseMapType = .standard
+        self.view.addSubview(mapView)
+        mapView.showCurrentLocationMarker = true
+        mapView.currentLocationTrackingMode = .onWithHeadingWithoutMapMoving
+    }
+    
+    private func setUpSearchBarUI() {
+        view.addSubview(searchBar)
+        searchBar.delegate = self
+        
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
+            searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 4),
+            searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -4)
+        ])
+    }
+    
+    private func setUpButton() {
+        view.addSubview(currentLocationButton)
+        view.addSubview(foodStoreButton)
+        view.addSubview(cafeButton)
+        view.addSubview(convenienceStoreButton)
+        view.addSubview(parkingButton)
+        view.addSubview(listButton)
+        
+        NSLayoutConstraint.activate([
+            currentLocationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            currentLocationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            currentLocationButton.widthAnchor.constraint(equalToConstant: 40),
+            currentLocationButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            foodStoreButton.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 12),
+            foodStoreButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            foodStoreButton.widthAnchor.constraint(equalToConstant: 50),
+            foodStoreButton.heightAnchor.constraint(equalToConstant: 20),
+            
+            cafeButton.centerYAnchor.constraint(equalTo: foodStoreButton.centerYAnchor),
+            cafeButton.leadingAnchor.constraint(equalTo: foodStoreButton.trailingAnchor, constant: 12),
+            cafeButton.widthAnchor.constraint(equalToConstant: 50),
+            cafeButton.heightAnchor.constraint(equalToConstant: 20),
+            
+            convenienceStoreButton.centerYAnchor.constraint(equalTo: foodStoreButton.centerYAnchor),
+            convenienceStoreButton.leadingAnchor.constraint(equalTo: cafeButton.trailingAnchor, constant: 12),
+            convenienceStoreButton.widthAnchor.constraint(equalToConstant: 50),
+            convenienceStoreButton.heightAnchor.constraint(equalToConstant: 20),
+            
+            parkingButton.centerYAnchor.constraint(equalTo: foodStoreButton.centerYAnchor),
+            parkingButton.leadingAnchor.constraint(equalTo: convenienceStoreButton.trailingAnchor, constant: 12),
+            parkingButton.widthAnchor.constraint(equalToConstant: 50),
+            parkingButton.heightAnchor.constraint(equalToConstant: 20),
+            
+            listButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            listButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            listButton.widthAnchor.constraint(equalToConstant: 40),
+            listButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
     
     private func setUpButtonAction() {
         let locationAction = UIAction { [weak self] _ in
             self?.moveToMyLocation()
         }
-        mainView.currentLocationButton.addAction(locationAction, for: .touchUpInside)
+        currentLocationButton.addAction(locationAction, for: .touchUpInside)
         
         let foodStoreAction = UIAction { [weak self] _ in
             self?.fetchLocationData(category: CategoryNamespace.foodStore)
         }
-        mainView.foodStoreButton.addAction(foodStoreAction, for: .touchUpInside)
+        foodStoreButton.addAction(foodStoreAction, for: .touchUpInside)
         
         let cafeAction = UIAction { [weak self] _ in
             self?.fetchLocationData(category: CategoryNamespace.cafe)
             
         }
-        mainView.cafeButton.addAction(cafeAction, for: .touchUpInside)
+        cafeButton.addAction(cafeAction, for: .touchUpInside)
         
         let convenienceAction = UIAction { [weak self] _ in
             self?.fetchLocationData(category: CategoryNamespace.convenienceStore)
         }
-        mainView.convenienceStoreButton.addAction(convenienceAction, for: .touchUpInside)
+        convenienceStoreButton.addAction(convenienceAction, for: .touchUpInside)
         
         let parkingAction = UIAction { [weak self] _ in
             self?.fetchLocationData(category: CategoryNamespace.parking)
         }
-        mainView.parkingButton.addAction(parkingAction, for: .touchUpInside)
+        parkingButton.addAction(parkingAction, for: .touchUpInside)
         
         let listAction = UIAction { [weak self] _ in
             self?.showListView()
         }
-        mainView.listButton.addAction(listAction, for: .touchUpInside)
+        listButton.addAction(listAction, for: .touchUpInside)
     }
     
     private func moveToMyLocation() {
         if let location = locationManager.location?.coordinate {
             let userLocation = MTMapPoint(geoCoord: .init(latitude: location.latitude, longitude: location.longitude))
-            mainView.mapView.setMapCenter(userLocation, animated: true)
+            mapView.setMapCenter(userLocation, animated: true)
         }
     }
     
@@ -77,9 +212,9 @@ final class MainViewController: UIViewController {
                 print(error)
             }
         }
-        mainView.mapView.removeAllPOIItems()
+        mapView.removeAllPOIItems()
         let customPins = restaurantItems.map { $0.poiItem }
-        mainView.mapView.addPOIItems(customPins)
+        mapView.addPOIItems(customPins)
     }
     
     private func addMarkers(for locationData: LocationData) {
@@ -90,7 +225,7 @@ final class MainViewController: UIViewController {
                 poiItem.mapPoint = MTMapPoint(geoCoord: .init(latitude: latitude, longitude: longitude))
             }
             poiItem.markerType = .yellowPin
-            mainView.mapView.addPOIItems([poiItem])
+            mapView.addPOIItems([poiItem])
         }
     }
     
@@ -111,7 +246,7 @@ extension MainViewController: UISearchBarDelegate {
     }
     
     private func updateMapView(with searchText: String) {
-        mainView.mapView.removeAllPOIItems()
+        mapView.removeAllPOIItems()
         let filteredPoiItems: [MTMapPOIItem]
         
         if searchText.isEmpty {
@@ -124,7 +259,7 @@ extension MainViewController: UISearchBarDelegate {
             }.map { $0.poiItem }
         }
         
-        mainView.mapView.addPOIItems(filteredPoiItems)
+        mapView.addPOIItems(filteredPoiItems)
     }
 }
 
@@ -228,8 +363,8 @@ extension MainViewController: AddRestaurant {
         
         let restaurantItem = RestaurantItem(restaurant: newRestaurants, poiItem: newPoint)
         restaurantItems.append(restaurantItem)
-        mainView.mapView.addPOIItems([newPoint])
-        mainView.mapView.setMapCenter(mapPointValue, zoomLevel: 2, animated: true)
+        mapView.addPOIItems([newPoint])
+        mapView.setMapCenter(mapPointValue, zoomLevel: 2, animated: true)
     }
     
     func didEditRestaurant(title: String, description: String, index: Int, category: RestaurantCategory) {
@@ -256,16 +391,16 @@ extension MainViewController: AddRestaurant {
             modifiedPOIItem.customImage = UIImage(named: "미국")
         }
         
-        mainView.mapView.addPOIItems(restaurantItems.map{$0.poiItem})
-        mainView.mapView.select(modifiedPOIItem, animated: true)
-        mainView.mapView.updateConstraints()
+        mapView.addPOIItems(restaurantItems.map{$0.poiItem})
+        mapView.select(modifiedPOIItem, animated: true)
+        mapView.updateConstraints()
     }
     
     func deletePin(withTag tag: Int) {
         guard tag >= 0 && tag < restaurantItems.count else { return }
         
         let poiItemToRemove = restaurantItems[tag].poiItem
-        mainView.mapView
+        mapView
             .removePOIItems([poiItemToRemove])
         restaurantItems.remove(at: tag)
         
