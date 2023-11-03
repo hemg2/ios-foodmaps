@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6384BAB62AF4D49E004FB32D /* DaumMap.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6384BAB52AF4D49E004FB32D /* DaumMap.xcframework */; };
+		6384BABE2AF4DEB3004FB32D /* DaumMap.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6384BABD2AF4DEB3004FB32D /* DaumMap.xcframework */; };
 		63BFBF0B2AD39284004150C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFBF0A2AD39284004150C7 /* AppDelegate.swift */; };
 		63BFBF0D2AD39284004150C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFBF0C2AD39284004150C7 /* SceneDelegate.swift */; };
 		63BFBF0F2AD39284004150C7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFBF0E2AD39284004150C7 /* MainViewController.swift */; };
@@ -65,7 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6384BAB52AF4D49E004FB32D /* DaumMap.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DaumMap.xcframework; path = ../Downloads/DaumMap.xcframework; sourceTree = "<group>"; };
+		6384BABD2AF4DEB3004FB32D /* DaumMap.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DaumMap.xcframework; path = ../Downloads/DaumMap.xcframework; sourceTree = "<group>"; };
 		63BFBF072AD39284004150C7 /* FoodMaps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodMaps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63BFBF0A2AD39284004150C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63BFBF0C2AD39284004150C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 				63BFC67D2AD3A525004150C7 /* QuartzCore.framework in Frameworks */,
 				63BFC67B2AD3A51D004150C7 /* CoreLocation.framework in Frameworks */,
 				63BFC6792AD3A513004150C7 /* SystemConfiguration.framework in Frameworks */,
-				6384BAB62AF4D49E004FB32D /* DaumMap.xcframework in Frameworks */,
+				6384BABE2AF4DEB3004FB32D /* DaumMap.xcframework in Frameworks */,
 				63BFC6772AD3A504004150C7 /* OpenGLES.framework in Frameworks */,
 				63BFC6742AD3A4D4004150C7 /* DaumMap.framework in Frameworks */,
 			);
@@ -259,7 +259,7 @@
 				63BFC67A2AD3A51D004150C7 /* CoreLocation.framework */,
 				63BFC6782AD3A512004150C7 /* SystemConfiguration.framework */,
 				63BFC6762AD3A504004150C7 /* OpenGLES.framework */,
-				6384BAB52AF4D49E004FB32D /* DaumMap.xcframework */,
+				6384BABD2AF4DEB3004FB32D /* DaumMap.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
