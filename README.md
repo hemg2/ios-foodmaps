@@ -4,11 +4,9 @@
 1. [소개](#-소개)
 2. [팀원](#-팀원)
 3. [타임라인](#-타임라인)
-4. [시각화된 프로젝트 구조](#-시각화된-프로젝트-구조)
-5. [실행 화면](#-실행-화면)
-6. [트러블 슈팅](#-트러블-슈팅)
-7. [참고 링크](#-참고-링크)
-8. [팀 회고](#-팀-회고)
+4. [실행 화면](#-실행-화면)
+5. [트러블 슈팅](#-트러블-슈팅)
+6. [참고 링크](#-참고-링크)
 
 </br>
 
@@ -154,7 +152,7 @@ func mapView(_ mapView: MTMapView!, finishedMapMoveAnimation mapCenterPoint: MTM
 <br>
 
 ## 📚 참고 링크
-
+- 앱 미실행시 다운로드 [DaumMap.xcframework.zip](https://github.com/hemg2/ios-foodmaps/files/13247845/DaumMap.xcframework.zip) </br>
 [카카오 지도 가이드](https://apis.map.kakao.com/ios/documentation/#MTMapView_updateCurrentLocationMarker) </br>
 [지도관련 메서드](https://apis.map.kakao.com/ios/guide/) </br>
 [카카오 지도 사용 블로그](https://iosminjae.tistory.com/14) </br>
