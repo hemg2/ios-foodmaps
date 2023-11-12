@@ -7,23 +7,132 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6385BC622AF40D44005CDA61 /* DaumMap.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6385BC612AF40D44005CDA61 /* DaumMap.xcframework */; };
 		63BFBF0B2AD39284004150C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFBF0A2AD39284004150C7 /* AppDelegate.swift */; };
 		63BFBF0D2AD39284004150C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFBF0C2AD39284004150C7 /* SceneDelegate.swift */; };
-		63BFBF0F2AD39284004150C7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFBF0E2AD39284004150C7 /* ViewController.swift */; };
-		63BFBF122AD39284004150C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63BFBF102AD39284004150C7 /* Main.storyboard */; };
+		63BFBF0F2AD39284004150C7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFBF0E2AD39284004150C7 /* MainViewController.swift */; };
 		63BFBF142AD39286004150C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63BFBF132AD39286004150C7 /* Assets.xcassets */; };
 		63BFBF172AD39286004150C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63BFBF152AD39286004150C7 /* LaunchScreen.storyboard */; };
+		63BFC6592AD3A4D4004150C7 /* map_pinup_custom@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6342AD3A4D4004150C7 /* map_pinup_custom@3x.png */; };
+		63BFC65A2AD3A4D4004150C7 /* map_pin_custom.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6352AD3A4D4004150C7 /* map_pin_custom.png */; };
+		63BFC65B2AD3A4D4004150C7 /* shadow_balloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6362AD3A4D4004150C7 /* shadow_balloon.png */; };
+		63BFC65C2AD3A4D4004150C7 /* map_pinup.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6372AD3A4D4004150C7 /* map_pinup.png */; };
+		63BFC65D2AD3A4D4004150C7 /* detail_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6382AD3A4D4004150C7 /* detail_button.png */; };
+		63BFC65E2AD3A4D4004150C7 /* map_pin_custom@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6392AD3A4D4004150C7 /* map_pin_custom@3x.png */; };
+		63BFC65F2AD3A4D4004150C7 /* map_pinup@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC63A2AD3A4D4004150C7 /* map_pinup@3x.png */; };
+		63BFC6602AD3A4D4004150C7 /* map_pin_shadow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC63B2AD3A4D4004150C7 /* map_pin_shadow@3x.png */; };
+		63BFC6612AD3A4D4004150C7 /* copyright.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC63C2AD3A4D4004150C7 /* copyright.png */; };
+		63BFC6622AD3A4D4004150C7 /* th_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC63D2AD3A4D4004150C7 /* th_line.png */; };
+		63BFC6632AD3A4D4004150C7 /* map_pin_red@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC63E2AD3A4D4004150C7 /* map_pin_red@3x.png */; };
+		63BFC6642AD3A4D4004150C7 /* daum_copyright.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC63F2AD3A4D4004150C7 /* daum_copyright.png */; };
+		63BFC6652AD3A4D4004150C7 /* map_pin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6402AD3A4D4004150C7 /* map_pin@3x.png */; };
+		63BFC6662AD3A4D4004150C7 /* map_present_tracking.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6412AD3A4D4004150C7 /* map_present_tracking.png */; };
+		63BFC6672AD3A4D4004150C7 /* map_pin_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6422AD3A4D4004150C7 /* map_pin_red.png */; };
+		63BFC6682AD3A4D4004150C7 /* info_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC64C2AD3A4D4004150C7 /* info_box.png */; };
+		63BFC6692AD3A4D4004150C7 /* point_sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC64D2AD3A4D4004150C7 /* point_sprite.png */; };
+		63BFC66A2AD3A4D4004150C7 /* map_pinup_custom.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC64E2AD3A4D4004150C7 /* map_pinup_custom.png */; };
+		63BFC66B2AD3A4D4004150C7 /* info_box_tail.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC64F2AD3A4D4004150C7 /* info_box_tail.png */; };
+		63BFC66C2AD3A4D4004150C7 /* noimage256.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6502AD3A4D4004150C7 /* noimage256.png */; };
+		63BFC66D2AD3A4D4004150C7 /* map_present_direction.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6512AD3A4D4004150C7 /* map_present_direction.png */; };
+		63BFC66E2AD3A4D4004150C7 /* map_pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6522AD3A4D4004150C7 /* map_pin.png */; };
+		63BFC66F2AD3A4D4004150C7 /* map_present.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6532AD3A4D4004150C7 /* map_present.png */; };
+		63BFC6702AD3A4D4004150C7 /* noimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6542AD3A4D4004150C7 /* noimage.png */; };
+		63BFC6712AD3A4D4004150C7 /* map_present_background_update.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6552AD3A4D4004150C7 /* map_present_background_update.png */; };
+		63BFC6722AD3A4D4004150C7 /* daum_th_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6562AD3A4D4004150C7 /* daum_th_line.png */; };
+		63BFC6732AD3A4D4004150C7 /* map_pin_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 63BFC6572AD3A4D4004150C7 /* map_pin_shadow.png */; };
+		63BFC6742AD3A4D4004150C7 /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC6582AD3A4D4004150C7 /* DaumMap.framework */; };
+		63BFC6772AD3A504004150C7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC6762AD3A504004150C7 /* OpenGLES.framework */; };
+		63BFC6792AD3A513004150C7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC6782AD3A512004150C7 /* SystemConfiguration.framework */; };
+		63BFC67B2AD3A51D004150C7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC67A2AD3A51D004150C7 /* CoreLocation.framework */; };
+		63BFC67D2AD3A525004150C7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC67C2AD3A525004150C7 /* QuartzCore.framework */; };
+		63BFC67F2AD3A535004150C7 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC67E2AD3A535004150C7 /* libc++.tbd */; };
+		63BFC6812AD3A53F004150C7 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC6802AD3A53F004150C7 /* libxml2.tbd */; };
+		63BFC6832AD3A54E004150C7 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BFC6822AD3A54E004150C7 /* libsqlite3.tbd */; };
+		63EA0DB52AD632B1001585EA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA0DB42AD632B1001585EA /* AddViewController.swift */; };
+		63EA0DB72AD639DD001585EA /* AddViewController+TextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA0DB62AD639DD001585EA /* AddViewController+TextViewDelegate.swift */; };
+		63EA0DBA2AD63A86001585EA /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EA0DB92AD63A86001585EA /* Restaurant.swift */; };
+		63ED4C6F2AD8E0260000F429 /* LocationNetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C6E2AD8E0260000F429 /* LocationNetWork.swift */; };
+		63ED4C712AD8E0520000F429 /* LocationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C702AD8E0520000F429 /* LocationAPI.swift */; };
+		63ED4C742AD8E1AA0000F429 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C732AD8E1AA0000F429 /* LocationData.swift */; };
+		63ED4C762AD8E1C00000F429 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C752AD8E1C00000F429 /* Document.swift */; };
+		63ED4C7B2AD8E2140000F429 /* MapViewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C7A2AD8E2140000F429 /* MapViewError.swift */; };
+		63ED4C7D2AD8E5450000F429 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C7C2AD8E5450000F429 /* APIKey.swift */; };
+		63ED4C862AD91E400000F429 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63ED4C852AD91E400000F429 /* Keys.plist */; };
+		63ED4C912ADCFB280000F429 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C902ADCFB280000F429 /* ListViewController.swift */; };
+		63ED4C932ADE85E20000F429 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C922ADE85E20000F429 /* ListTableViewCell.swift */; };
+		63ED4C952ADEA5520000F429 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C942ADEA5520000F429 /* LocationDataManager.swift */; };
+		63ED4C9A2AE0C24F0000F429 /* CategoryNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */; };
+		63ED4C9F2AEA7E5A0000F429 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED4C9E2AEA7E5A0000F429 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6385BC612AF40D44005CDA61 /* DaumMap.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = DaumMap.xcframework; path = ../Downloads/DaumMap.xcframework; sourceTree = "<group>"; };
 		63BFBF072AD39284004150C7 /* FoodMaps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodMaps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63BFBF0A2AD39284004150C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63BFBF0C2AD39284004150C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63BFBF0E2AD39284004150C7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		63BFBF112AD39284004150C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		63BFBF0E2AD39284004150C7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		63BFBF132AD39286004150C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63BFBF162AD39286004150C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63BFBF182AD39286004150C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63BFC6342AD3A4D4004150C7 /* map_pinup_custom@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pinup_custom@3x.png"; sourceTree = "<group>"; };
+		63BFC6352AD3A4D4004150C7 /* map_pin_custom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin_custom.png; sourceTree = "<group>"; };
+		63BFC6362AD3A4D4004150C7 /* shadow_balloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow_balloon.png; sourceTree = "<group>"; };
+		63BFC6372AD3A4D4004150C7 /* map_pinup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pinup.png; sourceTree = "<group>"; };
+		63BFC6382AD3A4D4004150C7 /* detail_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detail_button.png; sourceTree = "<group>"; };
+		63BFC6392AD3A4D4004150C7 /* map_pin_custom@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pin_custom@3x.png"; sourceTree = "<group>"; };
+		63BFC63A2AD3A4D4004150C7 /* map_pinup@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pinup@3x.png"; sourceTree = "<group>"; };
+		63BFC63B2AD3A4D4004150C7 /* map_pin_shadow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pin_shadow@3x.png"; sourceTree = "<group>"; };
+		63BFC63C2AD3A4D4004150C7 /* copyright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = copyright.png; sourceTree = "<group>"; };
+		63BFC63D2AD3A4D4004150C7 /* th_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = th_line.png; sourceTree = "<group>"; };
+		63BFC63E2AD3A4D4004150C7 /* map_pin_red@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pin_red@3x.png"; sourceTree = "<group>"; };
+		63BFC63F2AD3A4D4004150C7 /* daum_copyright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = daum_copyright.png; sourceTree = "<group>"; };
+		63BFC6402AD3A4D4004150C7 /* map_pin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pin@3x.png"; sourceTree = "<group>"; };
+		63BFC6412AD3A4D4004150C7 /* map_present_tracking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_present_tracking.png; sourceTree = "<group>"; };
+		63BFC6422AD3A4D4004150C7 /* map_pin_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin_red.png; sourceTree = "<group>"; };
+		63BFC6442AD3A4D4004150C7 /* MTMapPOIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapPOIItem.h; sourceTree = "<group>"; };
+		63BFC6452AD3A4D4004150C7 /* MTMapCameraUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapCameraUpdate.h; sourceTree = "<group>"; };
+		63BFC6462AD3A4D4004150C7 /* MTMapReverseGeoCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapReverseGeoCoder.h; sourceTree = "<group>"; };
+		63BFC6472AD3A4D4004150C7 /* MTMapPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapPolyline.h; sourceTree = "<group>"; };
+		63BFC6482AD3A4D4004150C7 /* MTMapLocationMarkerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapLocationMarkerItem.h; sourceTree = "<group>"; };
+		63BFC6492AD3A4D4004150C7 /* MTMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapView.h; sourceTree = "<group>"; };
+		63BFC64A2AD3A4D4004150C7 /* MTMapGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapGeometry.h; sourceTree = "<group>"; };
+		63BFC64B2AD3A4D4004150C7 /* MTMapCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMapCircle.h; sourceTree = "<group>"; };
+		63BFC64C2AD3A4D4004150C7 /* info_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_box.png; sourceTree = "<group>"; };
+		63BFC64D2AD3A4D4004150C7 /* point_sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = point_sprite.png; sourceTree = "<group>"; };
+		63BFC64E2AD3A4D4004150C7 /* map_pinup_custom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pinup_custom.png; sourceTree = "<group>"; };
+		63BFC64F2AD3A4D4004150C7 /* info_box_tail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_box_tail.png; sourceTree = "<group>"; };
+		63BFC6502AD3A4D4004150C7 /* noimage256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimage256.png; sourceTree = "<group>"; };
+		63BFC6512AD3A4D4004150C7 /* map_present_direction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_present_direction.png; sourceTree = "<group>"; };
+		63BFC6522AD3A4D4004150C7 /* map_pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin.png; sourceTree = "<group>"; };
+		63BFC6532AD3A4D4004150C7 /* map_present.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_present.png; sourceTree = "<group>"; };
+		63BFC6542AD3A4D4004150C7 /* noimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimage.png; sourceTree = "<group>"; };
+		63BFC6552AD3A4D4004150C7 /* map_present_background_update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_present_background_update.png; sourceTree = "<group>"; };
+		63BFC6562AD3A4D4004150C7 /* daum_th_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = daum_th_line.png; sourceTree = "<group>"; };
+		63BFC6572AD3A4D4004150C7 /* map_pin_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin_shadow.png; sourceTree = "<group>"; };
+		63BFC6582AD3A4D4004150C7 /* DaumMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DaumMap.framework; sourceTree = "<group>"; };
+		63BFC6762AD3A504004150C7 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		63BFC6782AD3A512004150C7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		63BFC67A2AD3A51D004150C7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		63BFC67C2AD3A525004150C7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		63BFC67E2AD3A535004150C7 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		63BFC6802AD3A53F004150C7 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		63BFC6822AD3A54E004150C7 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		63BFC6842AD3A5D4004150C7 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		63EA0DB42AD632B1001585EA /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		63EA0DB62AD639DD001585EA /* AddViewController+TextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddViewController+TextViewDelegate.swift"; sourceTree = "<group>"; };
+		63EA0DB92AD63A86001585EA /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		63ED4C6E2AD8E0260000F429 /* LocationNetWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationNetWork.swift; sourceTree = "<group>"; };
+		63ED4C702AD8E0520000F429 /* LocationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAPI.swift; sourceTree = "<group>"; };
+		63ED4C732AD8E1AA0000F429 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
+		63ED4C752AD8E1C00000F429 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		63ED4C7A2AD8E2140000F429 /* MapViewError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewError.swift; sourceTree = "<group>"; };
+		63ED4C7C2AD8E5450000F429 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		63ED4C852AD91E400000F429 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		63ED4C902ADCFB280000F429 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		63ED4C922ADE85E20000F429 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		63ED4C942ADEA5520000F429 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
+		63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNamespace.swift; sourceTree = "<group>"; };
+		63ED4C9E2AEA7E5A0000F429 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +140,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63BFC6832AD3A54E004150C7 /* libsqlite3.tbd in Frameworks */,
+				63BFC6812AD3A53F004150C7 /* libxml2.tbd in Frameworks */,
+				63BFC67F2AD3A535004150C7 /* libc++.tbd in Frameworks */,
+				63BFC67D2AD3A525004150C7 /* QuartzCore.framework in Frameworks */,
+				63BFC67B2AD3A51D004150C7 /* CoreLocation.framework in Frameworks */,
+				63BFC6792AD3A513004150C7 /* SystemConfiguration.framework in Frameworks */,
+				6385BC622AF40D44005CDA61 /* DaumMap.xcframework in Frameworks */,
+				63BFC6772AD3A504004150C7 /* OpenGLES.framework in Frameworks */,
+				63BFC6742AD3A4D4004150C7 /* DaumMap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +160,7 @@
 			children = (
 				63BFBF092AD39284004150C7 /* FoodMaps */,
 				63BFBF082AD39284004150C7 /* Products */,
+				63BFC6752AD3A504004150C7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +175,185 @@
 		63BFBF092AD39284004150C7 /* FoodMaps */ = {
 			isa = PBXGroup;
 			children = (
-				63BFBF0A2AD39284004150C7 /* AppDelegate.swift */,
-				63BFBF0C2AD39284004150C7 /* SceneDelegate.swift */,
-				63BFBF0E2AD39284004150C7 /* ViewController.swift */,
-				63BFBF102AD39284004150C7 /* Main.storyboard */,
-				63BFBF132AD39286004150C7 /* Assets.xcassets */,
-				63BFBF152AD39286004150C7 /* LaunchScreen.storyboard */,
+				63ED4C852AD91E400000F429 /* Keys.plist */,
 				63BFBF182AD39286004150C7 /* Info.plist */,
+				63BFC6842AD3A5D4004150C7 /* BridgingHeader.h */,
+				63ED4C982AE0C20E0000F429 /* Namespace */,
+				63ED4C6D2AD8E00E0000F429 /* NetWork */,
+				63ED4C722AD8E10B0000F429 /* Entity */,
+				63EA0DB82AD63A76001585EA /* Model */,
+				63EA0DB32AD63260001585EA /* Contorller */,
+				63BFBF152AD39286004150C7 /* LaunchScreen.storyboard */,
+				63BFBF132AD39286004150C7 /* Assets.xcassets */,
+				63EA0DB12AD631F4001585EA /* AppSupport */,
+				63ED4C792AD8E1DF0000F429 /* Error */,
 			);
 			path = FoodMaps;
+			sourceTree = "<group>";
+		};
+		63BFC6322AD3A4D4004150C7 /* DaumMap.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				63BFC6332AD3A4D4004150C7 /* Resources */,
+				63BFC6582AD3A4D4004150C7 /* DaumMap.framework */,
+			);
+			path = DaumMap.embeddedframework;
+			sourceTree = SOURCE_ROOT;
+		};
+		63BFC6332AD3A4D4004150C7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				63BFC6342AD3A4D4004150C7 /* map_pinup_custom@3x.png */,
+				63BFC6352AD3A4D4004150C7 /* map_pin_custom.png */,
+				63BFC6362AD3A4D4004150C7 /* shadow_balloon.png */,
+				63BFC6372AD3A4D4004150C7 /* map_pinup.png */,
+				63BFC6382AD3A4D4004150C7 /* detail_button.png */,
+				63BFC6392AD3A4D4004150C7 /* map_pin_custom@3x.png */,
+				63BFC63A2AD3A4D4004150C7 /* map_pinup@3x.png */,
+				63BFC63B2AD3A4D4004150C7 /* map_pin_shadow@3x.png */,
+				63BFC63C2AD3A4D4004150C7 /* copyright.png */,
+				63BFC63D2AD3A4D4004150C7 /* th_line.png */,
+				63BFC63E2AD3A4D4004150C7 /* map_pin_red@3x.png */,
+				63BFC63F2AD3A4D4004150C7 /* daum_copyright.png */,
+				63BFC6402AD3A4D4004150C7 /* map_pin@3x.png */,
+				63BFC6412AD3A4D4004150C7 /* map_present_tracking.png */,
+				63BFC6422AD3A4D4004150C7 /* map_pin_red.png */,
+				63BFC6432AD3A4D4004150C7 /* Headers */,
+				63BFC64C2AD3A4D4004150C7 /* info_box.png */,
+				63BFC64D2AD3A4D4004150C7 /* point_sprite.png */,
+				63BFC64E2AD3A4D4004150C7 /* map_pinup_custom.png */,
+				63BFC64F2AD3A4D4004150C7 /* info_box_tail.png */,
+				63BFC6502AD3A4D4004150C7 /* noimage256.png */,
+				63BFC6512AD3A4D4004150C7 /* map_present_direction.png */,
+				63BFC6522AD3A4D4004150C7 /* map_pin.png */,
+				63BFC6532AD3A4D4004150C7 /* map_present.png */,
+				63BFC6542AD3A4D4004150C7 /* noimage.png */,
+				63BFC6552AD3A4D4004150C7 /* map_present_background_update.png */,
+				63BFC6562AD3A4D4004150C7 /* daum_th_line.png */,
+				63BFC6572AD3A4D4004150C7 /* map_pin_shadow.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		63BFC6432AD3A4D4004150C7 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				63BFC6442AD3A4D4004150C7 /* MTMapPOIItem.h */,
+				63BFC6452AD3A4D4004150C7 /* MTMapCameraUpdate.h */,
+				63BFC6462AD3A4D4004150C7 /* MTMapReverseGeoCoder.h */,
+				63BFC6472AD3A4D4004150C7 /* MTMapPolyline.h */,
+				63BFC6482AD3A4D4004150C7 /* MTMapLocationMarkerItem.h */,
+				63BFC6492AD3A4D4004150C7 /* MTMapView.h */,
+				63BFC64A2AD3A4D4004150C7 /* MTMapGeometry.h */,
+				63BFC64B2AD3A4D4004150C7 /* MTMapCircle.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		63BFC6752AD3A504004150C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				63BFC6322AD3A4D4004150C7 /* DaumMap.embeddedframework */,
+				63BFC6822AD3A54E004150C7 /* libsqlite3.tbd */,
+				63BFC6802AD3A53F004150C7 /* libxml2.tbd */,
+				63BFC67E2AD3A535004150C7 /* libc++.tbd */,
+				63BFC67C2AD3A525004150C7 /* QuartzCore.framework */,
+				63BFC67A2AD3A51D004150C7 /* CoreLocation.framework */,
+				63BFC6782AD3A512004150C7 /* SystemConfiguration.framework */,
+				63BFC6762AD3A504004150C7 /* OpenGLES.framework */,
+				6385BC612AF40D44005CDA61 /* DaumMap.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		63EA0DB12AD631F4001585EA /* AppSupport */ = {
+			isa = PBXGroup;
+			children = (
+				63BFBF0A2AD39284004150C7 /* AppDelegate.swift */,
+				63BFBF0C2AD39284004150C7 /* SceneDelegate.swift */,
+			);
+			path = AppSupport;
+			sourceTree = "<group>";
+		};
+		63EA0DB32AD63260001585EA /* Contorller */ = {
+			isa = PBXGroup;
+			children = (
+				63ED4C9D2AEA7E4A0000F429 /* View */,
+				63BFBF0E2AD39284004150C7 /* MainViewController.swift */,
+				63EA0DBE2AD63E74001585EA /* AddViewController */,
+				63ED4C8D2ADCFAB20000F429 /* ListViewController */,
+			);
+			path = Contorller;
+			sourceTree = "<group>";
+		};
+		63EA0DB82AD63A76001585EA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				63EA0DB92AD63A86001585EA /* Restaurant.swift */,
+				63ED4C942ADEA5520000F429 /* LocationDataManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		63EA0DBE2AD63E74001585EA /* AddViewController */ = {
+			isa = PBXGroup;
+			children = (
+				63EA0DB42AD632B1001585EA /* AddViewController.swift */,
+				63EA0DB62AD639DD001585EA /* AddViewController+TextViewDelegate.swift */,
+			);
+			path = AddViewController;
+			sourceTree = "<group>";
+		};
+		63ED4C6D2AD8E00E0000F429 /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				63ED4C7C2AD8E5450000F429 /* APIKey.swift */,
+				63ED4C702AD8E0520000F429 /* LocationAPI.swift */,
+				63ED4C6E2AD8E0260000F429 /* LocationNetWork.swift */,
+			);
+			path = NetWork;
+			sourceTree = "<group>";
+		};
+		63ED4C722AD8E10B0000F429 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				63ED4C732AD8E1AA0000F429 /* LocationData.swift */,
+				63ED4C752AD8E1C00000F429 /* Document.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		63ED4C792AD8E1DF0000F429 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				63ED4C7A2AD8E2140000F429 /* MapViewError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		63ED4C8D2ADCFAB20000F429 /* ListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				63ED4C902ADCFB280000F429 /* ListViewController.swift */,
+				63ED4C922ADE85E20000F429 /* ListTableViewCell.swift */,
+			);
+			path = ListViewController;
+			sourceTree = "<group>";
+		};
+		63ED4C982AE0C20E0000F429 /* Namespace */ = {
+			isa = PBXGroup;
+			children = (
+				63ED4C992AE0C24F0000F429 /* CategoryNamespace.swift */,
+			);
+			path = Namespace;
+			sourceTree = "<group>";
+		};
+		63ED4C9D2AEA7E4A0000F429 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				63ED4C9E2AEA7E5A0000F429 /* MainView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,9 +414,36 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63BFC66B2AD3A4D4004150C7 /* info_box_tail.png in Resources */,
+				63BFC6602AD3A4D4004150C7 /* map_pin_shadow@3x.png in Resources */,
+				63BFC66E2AD3A4D4004150C7 /* map_pin.png in Resources */,
+				63BFC6672AD3A4D4004150C7 /* map_pin_red.png in Resources */,
+				63BFC65F2AD3A4D4004150C7 /* map_pinup@3x.png in Resources */,
+				63BFC6692AD3A4D4004150C7 /* point_sprite.png in Resources */,
+				63BFC6652AD3A4D4004150C7 /* map_pin@3x.png in Resources */,
+				63BFC66C2AD3A4D4004150C7 /* noimage256.png in Resources */,
+				63BFC66F2AD3A4D4004150C7 /* map_present.png in Resources */,
+				63BFC6642AD3A4D4004150C7 /* daum_copyright.png in Resources */,
+				63BFC6612AD3A4D4004150C7 /* copyright.png in Resources */,
+				63BFC65B2AD3A4D4004150C7 /* shadow_balloon.png in Resources */,
+				63BFC65E2AD3A4D4004150C7 /* map_pin_custom@3x.png in Resources */,
+				63BFC6622AD3A4D4004150C7 /* th_line.png in Resources */,
+				63BFC66A2AD3A4D4004150C7 /* map_pinup_custom.png in Resources */,
 				63BFBF172AD39286004150C7 /* LaunchScreen.storyboard in Resources */,
+				63BFC6722AD3A4D4004150C7 /* daum_th_line.png in Resources */,
+				63BFC6592AD3A4D4004150C7 /* map_pinup_custom@3x.png in Resources */,
 				63BFBF142AD39286004150C7 /* Assets.xcassets in Resources */,
-				63BFBF122AD39284004150C7 /* Main.storyboard in Resources */,
+				63BFC6662AD3A4D4004150C7 /* map_present_tracking.png in Resources */,
+				63BFC6732AD3A4D4004150C7 /* map_pin_shadow.png in Resources */,
+				63BFC66D2AD3A4D4004150C7 /* map_present_direction.png in Resources */,
+				63BFC6712AD3A4D4004150C7 /* map_present_background_update.png in Resources */,
+				63BFC65D2AD3A4D4004150C7 /* detail_button.png in Resources */,
+				63ED4C862AD91E400000F429 /* Keys.plist in Resources */,
+				63BFC6632AD3A4D4004150C7 /* map_pin_red@3x.png in Resources */,
+				63BFC6702AD3A4D4004150C7 /* noimage.png in Resources */,
+				63BFC6682AD3A4D4004150C7 /* info_box.png in Resources */,
+				63BFC65A2AD3A4D4004150C7 /* map_pin_custom.png in Resources */,
+				63BFC65C2AD3A4D4004150C7 /* map_pinup.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +454,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63BFBF0F2AD39284004150C7 /* ViewController.swift in Sources */,
+				63ED4C742AD8E1AA0000F429 /* LocationData.swift in Sources */,
+				63ED4C952ADEA5520000F429 /* LocationDataManager.swift in Sources */,
+				63ED4C7B2AD8E2140000F429 /* MapViewError.swift in Sources */,
+				63BFBF0F2AD39284004150C7 /* MainViewController.swift in Sources */,
 				63BFBF0B2AD39284004150C7 /* AppDelegate.swift in Sources */,
+				63EA0DBA2AD63A86001585EA /* Restaurant.swift in Sources */,
+				63ED4C762AD8E1C00000F429 /* Document.swift in Sources */,
+				63ED4C912ADCFB280000F429 /* ListViewController.swift in Sources */,
+				63ED4C6F2AD8E0260000F429 /* LocationNetWork.swift in Sources */,
+				63EA0DB72AD639DD001585EA /* AddViewController+TextViewDelegate.swift in Sources */,
+				63EA0DB52AD632B1001585EA /* AddViewController.swift in Sources */,
+				63ED4C9F2AEA7E5A0000F429 /* MainView.swift in Sources */,
 				63BFBF0D2AD39284004150C7 /* SceneDelegate.swift in Sources */,
+				63ED4C9A2AE0C24F0000F429 /* CategoryNamespace.swift in Sources */,
+				63ED4C7D2AD8E5450000F429 /* APIKey.swift in Sources */,
+				63ED4C712AD8E0520000F429 /* LocationAPI.swift in Sources */,
+				63ED4C932ADE85E20000F429 /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		63BFBF102AD39284004150C7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				63BFBF112AD39284004150C7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		63BFBF152AD39286004150C7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -174,7 +496,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -222,6 +544,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/a1/Desktop/FoodMaps/FoodMaps/BridgingHeader.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -234,7 +557,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -275,6 +598,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/a1/Desktop/FoodMaps/FoodMaps/BridgingHeader.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -287,11 +611,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6923PJ958M;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DaumMap.embeddedframework",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FoodMaps/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치를 받으려는 권한을 획득입니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치를 받으려는 권한을 획득입니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 기반 정보 탐색 및 검색 기능을 이용 할 수 있습니다.(필수권한)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -302,6 +633,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.hemg2.FoodMaps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/a1/ios-foodmaps/FoodMaps/BridgingHeader.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -314,11 +646,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6923PJ958M;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DaumMap.embeddedframework",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FoodMaps/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치를 받으려는 권한을 획득입니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치를 받으려는 권한을 획득입니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 기반 정보 탐색 및 검색 기능을 이용 할 수 있습니다.(필수권한)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -329,6 +668,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kr.co.hemg2.FoodMaps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/a1/ios-foodmaps/FoodMaps/BridgingHeader.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
