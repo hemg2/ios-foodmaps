@@ -17,7 +17,7 @@
 ## 👨‍💻 팀원
 | hamg |
 | :--------: |
-|<Img src="https://cdn.discordapp.com/attachments/1148871276677562388/1164490177939517520/1m_.jpeg?ex=654366fd&is=6530f1fd&hm=6f0dbdf9e9ad9df57b852f6ebdcd5477b1095d735f6a40c2a39570f2c9427532&" width="250" height="400"> |
+|<Img src="https://github.com/hemg2/ios-foodmaps/assets/101572902/80c233be-07d5-481f-9de8-0bf10fbeddc1" width="250" height="400"> |
 |[Github Profile](https://github.com/Hoon94) |
 
 
@@ -42,11 +42,11 @@
 
 |    |기본 화면| 이동후 음식점 불러오기|
 |:--:|:--:|:--:|
-|작동 화면| <img src="https://cdn.discordapp.com/attachments/1148871276677562388/1163807966613483561/ddcef104a34d8135.gif?ex=6540eba1&is=652e76a1&hm=249fccd1f78143f8170ff9e7e6271cd1850d7dbf4ee0389dcad5302c69afef5d&" width="400" height="600"/>|<img src="https://cdn.discordapp.com/attachments/1148871276677562388/1163807967024517140/ed47e30791c09211.gif?ex=6540eba1&is=652e76a1&hm=4b83d98d2e11e4a2daddf461416b98561b69c0658aa204f479da81995641901f&" width="400" height="600"/>|
+|작동 화면| <img src="https://github.com/hemg2/ios-foodmaps/assets/101572902/cb65396d-5813-4921-bbfb-1342007912da" width="400" height="600"/>|<img src="https://github.com/hemg2/ios-foodmaps/assets/101572902/af1cdb6e-0890-43e4-a6b1-f486b3111ba7" width="400" height="600"/>|
 
-| 커스텀 마커 생성|
-|:--:|
-|<img src="https://github.com/hemg2/ios-foodmaps/assets/101572902/f82c5259-7500-4169-9075-afc3255bc69a" width="400" height="600"/>  |
+|    |커스텀 마커 생성|카테고리별 통신|
+|:--:|:--:|:--:|
+|작동 화면|<img src="https://github.com/hemg2/ios-foodmaps/assets/101572902/f82c5259-7500-4169-9075-afc3255bc69a" width="400" height="600"/>  |<img src="https://github.com/hemg2/ios-foodmaps/assets/101572902/9715873b-9bfe-4c5d-b4cf-59a6f2917b72" width="400" height="600"/>|
 
 </br>
 
